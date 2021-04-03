@@ -109,7 +109,7 @@ exports.sendFakeToko = (from, teks, fake) => {
 }
 	xinz.sendMessage(from, teks, MessageType.text, {quoted: anu})
 }
-exports.sendFakeThumb = async function(from, url, title, desc, fotonya){
+exports.sendFakeThumb = async function(from, url, title, desc, comnya, fotonya){
 	var anoim = {
 		detectLinks: false
 	}
@@ -117,8 +117,15 @@ exports.sendFakeThumb = async function(from, url, title, desc, fotonya){
 	qul.title = title
 	qul.description = desc
 	qul.jpegThumbnail = fotonya ? fotonya : fs.readFileSync(`./media/aqul.jpeg`)
-	qul.canonicaUrl = "http://self-bot.com"
+	qul.canonicaUrl = comnya
 	xinz.sendMessage(from, qul, MessageType.extendedText, anoim)
+}
+exports.sendFakeImg = function(from, imageasli, caption, thumbnail, qul){
+	let ai = {
+		thumbnail: thumbnail ? thumbnail : fs.readFileSync(`./media/aqul.jpeg`),
+		quoted: qul ? qul : ''
+	}
+	xinz.sendMessage(from, imageasli, MessageType.image, ai)
 }
 exports.sendMediaURL = async(to, url, text="", qul, mids=[]) =>{
 	if(mids.length > 0){

@@ -117,6 +117,10 @@ No prefix
 => ${prefix}setprefix
 => ${prefix}setname
 => ${prefix}setbio
+=> ${prefix}fdeface
+=> ${prefix}fakethumbnail
+=> ${prefix}setthumb
+=> ${prefix}getpic
 
 More? rakit sendirilah`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
@@ -265,7 +269,7 @@ More? rakit sendirilah`
 				if (!isQuotedSticker) return aqul.reply(from, `Reply sticker dengan caption *${prefix}takestick nama|author*`, qul)
 				const pembawm = body.slice(11)
 				if (!pembawm.includes('|')) return aqul.reply(from, `Reply sticker dengan caption *${prefix}takestick nama|author*`, qul)
-				const encmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+				const encmedia = JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				const media = await xinz.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
 				const packname = pembawm.split('|')[0]
 				const author = pembawm.split('|')[1]
@@ -369,6 +373,45 @@ More? rakit sendirilah`
 				aqul.setBio(arg)
 				.then((res) => aqul.sendFakeStatus(from, JSON.stringify(res), fake))
 				.catch((err) => aqul.sendFakeStatus(from, JSON.stringify(err), fake))
+				break
+			case 'fdeface': case 'hack':
+				if (!arg) return aqul.reply(from, `Penggunaaan ${prefix}fdeface url|title|desc|bawahnya`, qul)
+				argz = arg.split("|")
+				if (!argz) return aqul.reply(from, `Penggunaaan ${prefix}fdeface url|title|desc|bawahnya`, qul)
+				if ((isMedia && !qul.message.videoMessage || isQuotedImage)) {
+					let encmedia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo : qul
+					let media = await xinz.downloadMediaMessage(encmedia)
+					aqul.sendFakeThumb(from, argz[0], argz[1], argz[2], argz[3], media)
+				} else {
+					aqul.sendFakeThumb(from, argz[0], argz[1], argz[2], argz[3])
+				}
+				break
+			case 'fakethumbnail': case 'fthumbnail': case 'fakethumb':
+				if ((isMedia && !qul.message.videoMessage || isQuotedImage)) {
+					let encmedia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo : qul
+					let media = await xinz.downloadMediaMessage(encmedia)
+					aqul.sendFakeImg(from, media, arg, fakeimage, qul)
+				} else {
+					aqul.reply(from, `Kirim gambar atau reply dengan caption ${prefix}fakethumb caption`)
+				}
+				break
+			case 'setthumb':
+				boij = JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
+				delb = await xinz.downloadMediaMessage(boij)
+				fs.writeFileSync(`./media/aqul.jpeg`, delb)
+				aqul.sendFakeStatus(from, `Sukses`, fake)
+				break
+			case 'getpic':
+				if (qul.message.extendedTextMessage != undefined){
+					mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
+					try {
+						pic = await xinz.getProfilePicture(mentioned[0])
+					} catch {
+						pic = 'https://i.ibb.co/Tq7d7TZ/age-hananta-495-photo.png'
+					}
+					thumb = await aqul.getBuffer(pic)
+					xinz.sendMessage(from, thumb, MessageType.image)
+				}
 				break
 			default:
 				if (chats.startsWith('>')){

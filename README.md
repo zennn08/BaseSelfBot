@@ -118,6 +118,10 @@ atau bisa juga
 | Set Prefix|✅|
 | Set Name|✅|
 | Set Bio|✅|
+| Fake Deface|✅|
+| Fake Thumbnail|✅|
+| Set thumb|✅|
+| Get pic|✅|
 
 # Thanks to
 * [`Baileys`](https://github.com/adiwajshing/Baileys)
