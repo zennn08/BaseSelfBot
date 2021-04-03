@@ -122,4 +122,4 @@ atau bisa juga
 # Thanks to
 * [`Baileys`](https://github.com/adiwajshing/Baileys)
 * [`MhankBarBar`](https://github.com/MhankBarBar)
-* [`Mamet*`](https://github.com/mamet8/)
+* [`Mamet`](https://github.com/mamet8/)
