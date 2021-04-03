@@ -99,6 +99,7 @@ Hitung mundur ramdhan
 
 No prefix
 => status
+=> > <eval>
 
 => ${prefix}sticker
 => ${prefix}swm nama | author

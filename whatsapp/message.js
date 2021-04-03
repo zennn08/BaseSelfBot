@@ -26,6 +26,12 @@ exports.sendKontak = (from, nomor, nama) => {
 exports.sendFakeStatus = (from, teks, faketeks) => {
 	xinz.sendMessage(from, teks, MessageType.text, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "mimetype": "image/jpeg", "caption": faketeks, "jpegThumbnail": fs.readFileSync(`./media/aqul.jpeg`)} } } })
 }
+exports.FakeStatusForwarded = (from, teks, faketeks) => {
+	xinz.sendMessage(from, teks, MessageType.text, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "mimetype": "image/jpeg", "caption": faketeks, "jpegThumbnail": fs.readFileSync(`./media/aqul.jpeg`)} }, contextInfo: {"forwardingScore": 999, "isForwarded": true} } })
+}
+exports.FakeStatusImgForwarded = (from, image, caption, faketeks) => {
+	xinz.sendMessage(from, image, MessageType.image, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "mimetype": "image/jpeg", "caption": faketeks, "jpegThumbnail": fs.readFileSync(`./media/aqul.jpeg`)} } }, caption: caption, contextInfo: {"forwardingScore": 999, "isForwarded": true} })
+}
 exports.sendFakeStatusWithImg = (from, image, caption, faketeks) => {
 	xinz.sendMessage(from, image, MessageType.image, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "mimetype": "image/jpeg", "caption": faketeks, "jpegThumbnail": fs.readFileSync(`./media/aqul.jpeg`)} } }, caption: caption })
 }
@@ -80,6 +86,32 @@ exports.runtime = function(seconds) {
 	var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
 	var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
 	return dDisplay + hDisplay + mDisplay + sDisplay;
+}
+exports.FakeTokoForwarded = (from, teks, fake) => {
+	anu = {
+		key: {
+			fromMe: false,
+			participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {})
+		},
+		message: {
+			"productMessage": {
+				"product": {
+					"productImage":{
+						"mimetype": "image/jpeg",
+						"jpegThumbnail": fs.readFileSync(`./media/aqul.jpeg`)
+					},
+					"title": fake,
+					"description": "Self Aqulzz nih Boss",
+					"currencyCode": "IDR",
+					"priceAmount1000": "50000000",
+					"retailerId": "Self Bot",
+					"productImageCount": 1
+				},
+				"businessOwnerJid": `0@s.whatsapp.net`
+		}
+	}
+}
+	xinz.sendMessage(from, teks, MessageType.text, {quoted: anu, contextInfo: {"forwardingScore": 999, "isForwarded": true}})
 }
 exports.sendFakeToko = (from, teks, fake) => {
 	anu = {

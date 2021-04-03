@@ -52,7 +52,20 @@
 - Change prefix [disini](https://github.com/zennn08/BaseSelfBot/blob/master/xinz.js#35)
 - Change faketeks [disini](https://github.com/zennn08/BaseSelfBot/blob/master/xinz.js#33)
 - Change gambar [disini](https://github.com/zennn08/BaseSelfBot/blob/master/media/aqul.jpeg) di replace gambar nya dan jangan diubah namanya
+- Bisa juga ganti biar jadi forwarded message
+```js
+aqul.sendFakeStatus(from, teks, fake)
+// bisa diubah menjadi
+aqul.FakeStatusForwarded(from, teks, fake)
 
+aqul.sendFakeStatusWithImg(from, image, caption, faketeks)
+// bisa diubah menjadi
+aqul.FakeStatusImgForwarded(from, image, caption, faketeks)
+
+aqul.sendFakeToko(from, teks, fake)
+// bisa diubah menjadi
+aqul.FakeTokoForwarded(from, teks, fake)
+```
 
 ## Installing the FFmpeg
 * Unduh salah satu versi FFmpeg yang tersedia dengan mengklik [di sini](https://www.gyan.dev/ffmpeg/builds/).
@@ -125,6 +138,8 @@ atau bisa juga
 | Sticker Tag|✅|
 | Image Tag|✅|
 | Kontak Tag|✅|
+| Forwarded Message|✅|
+| Eval|✅|
 
 # Thanks to
 * [`Baileys`](https://github.com/adiwajshing/Baileys)
