@@ -1,0 +1,29 @@
+{
+  "name": "Base Self",
+  "version": "0.0.1",
+  "description": "Ga ada",
+  "main": "xinz.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node xinz.js"
+  },
+  "author": "aqulzz",
+  "dependencies": {
+    "@adiwajshing/baileys": "^3.4.1",
+    "axios": "^0.21.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "moment-timezone": "^0.5.33",
+    "request": "^2.88.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zennn08/BaseSelfBot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zennn08/BaseSelfBot/issues"
+  },
+  "homepage": "https://github.com/zennn08/BaseSelfBot#readme"
+}
