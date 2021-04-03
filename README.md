@@ -122,6 +122,9 @@ atau bisa juga
 | Fake Thumbnail|✅|
 | Set thumb|✅|
 | Get pic|✅|
+| Sticker Tag|✅|
+| Image Tag|✅|
+| Kontak Tag|✅|
 
 # Thanks to
 * [`Baileys`](https://github.com/adiwajshing/Baileys)

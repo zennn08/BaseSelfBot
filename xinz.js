@@ -121,6 +121,9 @@ No prefix
 => ${prefix}fakethumbnail
 => ${prefix}setthumb
 => ${prefix}getpic
+=> ${prefix}stickertag
+=> ${prefix}imgtag
+=> ${prefix}kontaktag
 
 More? rakit sendirilah`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
@@ -392,7 +395,7 @@ More? rakit sendirilah`
 					let media = await xinz.downloadMediaMessage(encmedia)
 					aqul.sendFakeImg(from, media, arg, fakeimage, qul)
 				} else {
-					aqul.reply(from, `Kirim gambar atau reply dengan caption ${prefix}fakethumb caption`)
+					aqul.reply(from, `Kirim gambar atau reply dengan caption ${prefix}fakethumb caption`, qul)
 				}
 				break
 			case 'setthumb':
@@ -411,6 +414,31 @@ More? rakit sendirilah`
 					}
 					thumb = await aqul.getBuffer(pic)
 					xinz.sendMessage(from, thumb, MessageType.image)
+				}
+				break
+			case 'imgtag':
+				if ((isMedia && !qul.message.videoMessage || isQuotedImage)) {
+					let encmedia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo : qul
+					let media = await xinz.downloadMediaMessage(encmedia)
+					aqul.hideTagImg(from, media)
+				} else {
+					aqul.reply(from, `Kirim gambar atau reply dengan caption ${prefix}imgtag caption`, qul)
+				}
+				break
+			case 'sticktag': case 'stickertag':
+				if (!isQuotedSticker) return aqul.reply(from, `Reply sticker dengan caption *${prefix}stickertag*`, qul)
+				let encmediai = JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+				let mediai = await xinz.downloadMediaMessage(encmediai)
+				aqul.hideTagSticker(from, mediai)
+				break
+			case 'kontaktag':
+				argz = arg.split('|')
+				if (!argz) return aqul.reply(from, `Penggunaan ${prefix}kontak @tag atau nomor|nama`, qul)
+				if (qul.message.extendedTextMessage != undefined){
+                    mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
+					aqul.hideTagKontak(from, mentioned[0].split('@')[0], argz[1])
+				} else {
+					aqul.hideTagKontak(from, argz[0], argz[1])
 				}
 				break
 			default:

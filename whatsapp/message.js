@@ -42,24 +42,22 @@ exports.hideTag = async function(from, text){
 	xinz.sendMessage(from, text, MessageType.text, {contextInfo: {"mentionedJid": ane}})
 }
 exports.hideTagImg = async function(from, image){
-	let buff = fs.readFileSync(image)
 	let anu = await xinz.groupMetadata(from)
 	let members = anu.participants
 	let ane = []
 	for (let i of members){
 		ane.push(i.jid)
 	}
-	xinz.sendMessage(from, buff, MessageType.image, {contextInfo: {"mentionedJid": ane}})
+	xinz.sendMessage(from, image, MessageType.image, {contextInfo: {"mentionedJid": ane}})
 }
 exports.hideTagSticker = async function(from, sticker){
-	let buff = fs.readFileSync(sticker)
 	let anu = await xinz.groupMetadata(from)
 	let members = anu.participants
 	let ane = []
 	for (let i of members){
 		ane.push(i.jid)
 	}
-	xinz.sendMessage(from, buff, MessageType.sticker, {contextInfo: {"mentionedJid": ane}})
+	xinz.sendMessage(from, sticker, MessageType.sticker, {contextInfo: {"mentionedJid": ane}})
 }
 exports.hideTagKontak = async function(from, nomor, nama){
 	let vcard = 'BEGIN:VCARD\n' + 'VERSION:3.0\n' + 'FN:' + nama + '\n' + 'ORG:Kontak\n' + 'TEL;type=CELL;type=VOICE;waid=' + nomor + ':+' + nomor + '\n' + 'END:VCARD'
