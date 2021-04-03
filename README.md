@@ -37,14 +37,20 @@
 > git clone https://github.com/zennn08/BaseSelfBot.git
 > cd BaseSelfBot
 > npm install
+> node xinz
 ```
 ## For Termux
 ```bash
+> termux-setup-storage
+> apt update && apt upgrade
+> pkg install nodejs
 > pkg install git
 > pkg install bash
 > git clone https://github.com/zennn08/BaseSelfBot.git
 > cd BaseSelfBot
 > bash install.sh
+> npm install
+> node xinz
 ```
 
 ## Edit file
@@ -148,3 +154,4 @@ atau bisa juga
 * [`SlavyanDesu`](https://github.com/SlavyanDesu)
 * [`VideFrelan`](https://github.com/VideFrelan)
 * [`TobyG74`](https://github.com/TobyG74)
+* [`DhyZx`](https://github.com/dhyZx)
