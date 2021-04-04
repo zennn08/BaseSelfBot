@@ -70,6 +70,7 @@ xinz.on('message-new', async(qul) => {
 		const groupAdmins = isGroup ? aqul.getGroupAdmins(groupMembers) : ''
 		const groupOwner = isGroup ? groupMetadata.owner : ''
 		const itsMe = sender === botNumber ? true : false
+		const q = args.join(' ')
 		const isUrl = (url) => {
 			return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%.+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%+.~#?&/=]*)/, 'gi'))
 		}
@@ -303,6 +304,11 @@ More? rakit sendirilah`
 					aqul.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), qul)
 					fs.unlinkSync(meidia)
 				})
+				break
+			case 'upstatus'://DhyZx
+				if (!q) return reply(`Kirim ${prefix}upstatus Textnya`)
+				aqul.sendMessage('status@broadcast', `${q}`, extendedText)
+				reply(`Done Up Status: ${q}`)
 				break
 			case 'hidetag':
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}hidetag teks`, qul)
