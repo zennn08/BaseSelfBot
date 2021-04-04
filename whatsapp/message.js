@@ -1,1 +1,184 @@
-const _0x2c82=['4832sWpNYj','close','Message','log','image/jpeg','data','\x20hours,\x20','sticker','sendFakeStatus','readFileSync','\x20day,\x20','sendFakeThumb','createWriteStream','xinz','Self\x20Aqulzz\x20nih\x20Boss','Self\x20Bot','@adiwajshing/baileys','FN:','1576188oeRpYQ','status@broadcast','1621sMmaxp','updateProfileName','getBuffer','head','isAdmin','1704978WEFVzP','now','hideTagKontak','unlinkSync','floor','audio','length','jid','runtime','END:VCARD','0@s.whatsapp.net','extendedText','VERSION:3.0\x0a','get','BEGIN:VCARD\x0a','\x20minutes,\x20','\x20days,\x20','sendSticker','toString','participants','axios','image','arraybuffer','contact','sendFakeStatusWithImg','372qGjJhZ','video','605260xjeNKV','Error\x20:\x20','289mFIhAo','setName','description','ORG:Kontak\x0a','1EdHceI','headers','sendMediaURL','generateLinkPreview','383861Qqhvyw','groupMetadata','done','./media/aqul.jpeg','sendMessage','TEL;type=CELL;type=VOICE;waid=','hideTagImg','setBio','./connect','sendFakeToko','canonicaUrl','12309YsbAWi','reply','\x20second','push','\x20hour,\x20','request','setStatus','jpegThumbnail','mp4Audio','hideTagSticker','text','\x20minute,\x20','sendText'];const _0x1a79=function(_0x5d6fbf,_0x233404){_0x5d6fbf=_0x5d6fbf-0xec;let _0x2c8231=_0x2c82[_0x5d6fbf];return _0x2c8231;};const _0x37a7f7=_0x1a79;(function(_0x64486a,_0x41beb2){const _0x3ad0de=_0x1a79;while(!![]){try{const _0x44c2ee=-parseInt(_0x3ad0de(0xf5))+parseInt(_0x3ad0de(0xee))+-parseInt(_0x3ad0de(0x132))*-parseInt(_0x3ad0de(0x10e))+parseInt(_0x3ad0de(0x11a))+parseInt(_0x3ad0de(0xf0))*-parseInt(_0x3ad0de(0x112))+-parseInt(_0x3ad0de(0x110))+parseInt(_0x3ad0de(0x125))*-parseInt(_0x3ad0de(0x116));if(_0x44c2ee===_0x41beb2)break;else _0x64486a['push'](_0x64486a['shift']());}catch(_0xe7c198){_0x64486a['push'](_0x64486a['shift']());}}}(_0x2c82,0xebf89));const {MessageType,Mimetype,WAConnection}=require(_0x37a7f7(0xec)),fs=require('fs'),conn=require(_0x37a7f7(0x122)),axios=require(_0x37a7f7(0x109)),request=require(_0x37a7f7(0x12a)),xinz=conn[_0x37a7f7(0x13f)];exports[_0x37a7f7(0x131)]=(_0xd2a242,_0x50c46c)=>{const _0x33d7df=_0x37a7f7;xinz[_0x33d7df(0x11e)](_0xd2a242,_0x50c46c,MessageType[_0x33d7df(0x12f)]);},exports[_0x37a7f7(0x126)]=(_0x16ac98,_0x314b45,_0x4691c5)=>{const _0x1a82b2=_0x37a7f7;xinz[_0x1a82b2(0x11e)](_0x16ac98,_0x314b45,MessageType[_0x1a82b2(0x12f)],{'quoted':_0x4691c5});},exports[_0x37a7f7(0x106)]=(_0x7f3ee9,_0x10e0f2,_0x174011)=>{const _0x222c37=_0x37a7f7;xinz['sendMessage'](_0x7f3ee9,_0x10e0f2,MessageType[_0x222c37(0x139)],{'quoted':_0x174011});},exports['sendKontak']=(_0x5dea15,_0x6c3bce,_0x46834b)=>{const _0x4d254a=_0x37a7f7,_0x4d5288=_0x4d254a(0x103)+_0x4d254a(0x101)+'FN:'+_0x46834b+'\x0a'+_0x4d254a(0x115)+_0x4d254a(0x11f)+_0x6c3bce+':+'+_0x6c3bce+'\x0a'+_0x4d254a(0xfe);xinz[_0x4d254a(0x11e)](_0x5dea15,{'displayname':_0x46834b,'vcard':_0x4d5288},MessageType[_0x4d254a(0x10c)]);},exports[_0x37a7f7(0x13a)]=(_0x2434c5,_0x3d677c,_0x4bdce3)=>{const _0x24de5e=_0x37a7f7;xinz[_0x24de5e(0x11e)](_0x2434c5,_0x3d677c,MessageType[_0x24de5e(0x12f)],{'quoted':{'key':{'fromMe':![],'participant':'0@s.whatsapp.net',..._0x2434c5?{'remoteJid':_0x24de5e(0xef)}:{}},'message':{'imageMessage':{'mimetype':_0x24de5e(0x136),'caption':_0x4bdce3,'jpegThumbnail':fs['readFileSync'](_0x24de5e(0x11d))}}}});},exports[_0x37a7f7(0x10d)]=(_0x42b249,_0x3b1787,_0x3a0b16,_0x495459)=>{const _0x2642aa=_0x37a7f7;xinz[_0x2642aa(0x11e)](_0x42b249,_0x3b1787,MessageType[_0x2642aa(0x10a)],{'quoted':{'key':{'fromMe':![],'participant':_0x2642aa(0xff),..._0x42b249?{'remoteJid':'status@broadcast'}:{}},'message':{'imageMessage':{'mimetype':_0x2642aa(0x136),'caption':_0x495459,'jpegThumbnail':fs[_0x2642aa(0x13b)](_0x2642aa(0x11d))}}},'caption':_0x3a0b16});},exports['sendMention']=(_0x1e1a17,_0x1cc771,_0x190272,_0x3d78a1)=>{const _0x28797e=_0x37a7f7;xinz[_0x28797e(0x11e)](_0x1e1a17,_0x1cc771,MessageType[_0x28797e(0x100)],{'contextInfo':{'mentionedJid':_0x190272},'quoted':_0x3d78a1});},exports['hideTag']=async function(_0x39c741,_0x3038f0){const _0x4e89aa=_0x37a7f7;let _0x19dfcf=await xinz['groupMetadata'](_0x39c741),_0x1e276c=_0x19dfcf['participants'],_0x5f391e=[];for(let _0x285860 of _0x1e276c){_0x5f391e[_0x4e89aa(0x128)](_0x285860[_0x4e89aa(0xfc)]);}xinz['sendMessage'](_0x39c741,_0x3038f0,MessageType[_0x4e89aa(0x12f)],{'contextInfo':{'mentionedJid':_0x5f391e}});},exports[_0x37a7f7(0x120)]=async function(_0x4f3858,_0x32203f){const _0x150ed2=_0x37a7f7;let _0xe9291c=fs['readFileSync'](_0x32203f),_0x25647e=await xinz['groupMetadata'](_0x4f3858),_0x4d9b5d=_0x25647e[_0x150ed2(0x108)],_0x29bee9=[];for(let _0x59f2b5 of _0x4d9b5d){_0x29bee9[_0x150ed2(0x128)](_0x59f2b5[_0x150ed2(0xfc)]);}xinz['sendMessage'](_0x4f3858,_0xe9291c,MessageType[_0x150ed2(0x10a)],{'contextInfo':{'mentionedJid':_0x29bee9}});},exports[_0x37a7f7(0x12e)]=async function(_0x91d50f,_0x44f666){const _0xaf8fb1=_0x37a7f7;let _0x3f7c03=fs[_0xaf8fb1(0x13b)](_0x44f666),_0x4ca084=await xinz[_0xaf8fb1(0x11b)](_0x91d50f),_0x29b5dc=_0x4ca084[_0xaf8fb1(0x108)],_0x29b1a8=[];for(let _0x17cce8 of _0x29b5dc){_0x29b1a8['push'](_0x17cce8['jid']);}xinz[_0xaf8fb1(0x11e)](_0x91d50f,_0x3f7c03,MessageType[_0xaf8fb1(0x139)],{'contextInfo':{'mentionedJid':_0x29b1a8}});},exports[_0x37a7f7(0xf7)]=async function(_0x262ef,_0xdf8c16,_0x5936bf){const _0x118c43=_0x37a7f7;let _0x19c971=_0x118c43(0x103)+_0x118c43(0x101)+_0x118c43(0xed)+_0x5936bf+'\x0a'+_0x118c43(0x115)+_0x118c43(0x11f)+_0xdf8c16+':+'+_0xdf8c16+'\x0a'+'END:VCARD',_0x36e767=await xinz[_0x118c43(0x11b)](_0x262ef),_0x4061c0=_0x36e767[_0x118c43(0x108)],_0x2c6815=[];for(let _0x492a5b of _0x4061c0){_0x2c6815[_0x118c43(0x128)](_0x492a5b[_0x118c43(0xfc)]);}xinz[_0x118c43(0x11e)](_0x262ef,{'displayname':_0x5936bf,'vcard':_0x19c971},MessageType['contact'],{'contextInfo':{'mentionedJid':_0x2c6815}});},exports[_0x37a7f7(0xfd)]=function(_0x3e2859){const _0x52b067=_0x37a7f7;_0x3e2859=Number(_0x3e2859);var _0x440f40=Math[_0x52b067(0xf9)](_0x3e2859/(0xe10*0x18)),_0x54dfab=Math['floor'](_0x3e2859%(0xe10*0x18)/0xe10),_0x2af11f=Math[_0x52b067(0xf9)](_0x3e2859%0xe10/0x3c),_0x5f433d=Math[_0x52b067(0xf9)](_0x3e2859%0x3c),_0x19f0c6=_0x440f40>0x0?_0x440f40+(_0x440f40==0x1?_0x52b067(0x13c):_0x52b067(0x105)):'',_0x400f7d=_0x54dfab>0x0?_0x54dfab+(_0x54dfab==0x1?_0x52b067(0x129):_0x52b067(0x138)):'',_0x4d101c=_0x2af11f>0x0?_0x2af11f+(_0x2af11f==0x1?_0x52b067(0x130):_0x52b067(0x104)):'',_0x43da59=_0x5f433d>0x0?_0x5f433d+(_0x5f433d==0x1?_0x52b067(0x127):'\x20seconds'):'';return _0x19f0c6+_0x400f7d+_0x4d101c+_0x43da59;},exports[_0x37a7f7(0x123)]=(_0x3b392e,_0x20e87f,_0x406df6)=>{const _0x4d1ad5=_0x37a7f7;anu={'key':{'fromMe':![],'participant':'0@s.whatsapp.net',..._0x3b392e?{'remoteJid':_0x4d1ad5(0xef)}:{}},'message':{'productMessage':{'product':{'productImage':{'mimetype':'image/jpeg','jpegThumbnail':fs[_0x4d1ad5(0x13b)](_0x4d1ad5(0x11d))},'title':_0x406df6,'description':_0x4d1ad5(0x140),'currencyCode':'IDR','priceAmount1000':'50000000','retailerId':_0x4d1ad5(0x141),'productImageCount':0x1},'businessOwnerJid':'0@s.whatsapp.net'}}},xinz['sendMessage'](_0x3b392e,_0x20e87f,MessageType[_0x4d1ad5(0x12f)],{'quoted':anu});},exports[_0x37a7f7(0x13d)]=async function(_0x1fe927,_0x4de75c,_0xd71fca,_0x273d3f,_0x3e24e2){const _0xd534dc=_0x37a7f7;var _0x508cd6={'detectLinks':![]},_0x58234c=await xinz[_0xd534dc(0x119)](_0x4de75c);_0x58234c['title']=_0xd71fca,_0x58234c[_0xd534dc(0x114)]=_0x273d3f,_0x58234c[_0xd534dc(0x12c)]=_0x3e24e2?_0x3e24e2:fs[_0xd534dc(0x13b)]('./media/aqul.jpeg'),_0x58234c[_0xd534dc(0x124)]='http://self-bot.com',xinz[_0xd534dc(0x11e)](_0x1fe927,_0x58234c,MessageType[_0xd534dc(0x100)],_0x508cd6);},exports[_0x37a7f7(0x118)]=async(_0x86921b,_0x5711d4,_0x53d3f1='',_0x2e669f,_0x6d94f8=[])=>{const _0x3d2fe9=_0x37a7f7;_0x6d94f8[_0x3d2fe9(0xfb)]>0x0&&(_0x53d3f1=normalizeMention(_0x86921b,_0x53d3f1,_0x6d94f8));const _0x437c42=Date[_0x3d2fe9(0xf6)]()/0x2710,_0x2b6914=_0x437c42[_0x3d2fe9(0x107)]();let _0x37aad6='';var _0x440196=function(_0x47b610,_0x1392b8,_0x2f21c6){const _0x4f1070=_0x3d2fe9;request[_0x4f1070(0xf3)](_0x47b610,function(_0x58a8db,_0x59e92f,_0x432d3f){const _0xec3fbb=_0x4f1070;_0x37aad6=_0x59e92f[_0xec3fbb(0x117)]['content-type'],request(_0x47b610)['pipe'](fs[_0xec3fbb(0x13e)](_0x1392b8))['on'](_0xec3fbb(0x133),_0x2f21c6);});};_0x440196(_0x5711d4,_0x2b6914,async function(){const _0x249ab7=_0x3d2fe9;console[_0x249ab7(0x135)](_0x249ab7(0x11c));let _0x1909da=fs['readFileSync'](_0x2b6914),_0x4e291a=_0x37aad6['split']('/')[0x0]+_0x249ab7(0x134);_0x37aad6==='image/gif'&&(_0x4e291a=MessageType[_0x249ab7(0x10f)],_0x37aad6=Mimetype['gif']),_0x37aad6['split']('/')[0x0]===_0x249ab7(0xfa)&&(_0x37aad6=Mimetype[_0x249ab7(0x12d)]),xinz[_0x249ab7(0x11e)](_0x86921b,_0x1909da,_0x4e291a,{'quoted':_0x2e669f,'mimetype':_0x37aad6,'caption':_0x53d3f1,'contextInfo':{'mentionedJid':_0x6d94f8}}),fs[_0x249ab7(0xf8)](_0x2b6914);});},exports['getGroupAdmins']=function(_0x1adb83){const _0x5f2c8b=_0x37a7f7;admins=[];for(let _0x460e55 of _0x1adb83){_0x460e55[_0x5f2c8b(0xf4)]?admins[_0x5f2c8b(0x128)](_0x460e55[_0x5f2c8b(0xfc)]):'';}return admins;},exports[_0x37a7f7(0xf2)]=async(_0x663048,_0x11bfa5)=>{const _0x8fbae8=_0x37a7f7;try{_0x11bfa5?_0x11bfa5:{};const _0x294b88=await axios({'method':_0x8fbae8(0x102),'url':_0x663048,'headers':{'DNT':0x1,'Upgrade-Insecure-Request':0x1},..._0x11bfa5,'responseType':_0x8fbae8(0x10b)});return _0x294b88[_0x8fbae8(0x137)];}catch(_0x107367){console[_0x8fbae8(0x135)](_0x8fbae8(0x111)+_0x107367);}},exports[_0x37a7f7(0x113)]=async function(_0x46623d){const _0x122cfb=_0x37a7f7,_0x156f0d=await xinz[_0x122cfb(0xf1)](_0x46623d);return _0x156f0d;},exports[_0x37a7f7(0x121)]=async function(_0x5397d5){const _0x1708c1=_0x37a7f7,_0x4a756b=await xinz[_0x1708c1(0x12b)](_0x5397d5);return _0x4a756b;};
+const {
+	MessageType,
+	Mimetype,
+    WAConnection
+} = require("@adiwajshing/baileys");
+const fs = require('fs');
+const conn = require('./connect');
+const axios = require('axios');
+const request = require('request');
+
+const xinz = conn.xinz
+
+exports.sendText = (from, text) => {
+    xinz.sendMessage(from, text, MessageType.text)
+}
+exports.reply = (from, text, qul) => {
+    xinz.sendMessage(from, text, MessageType.text, {quoted: qul})
+}
+exports.sendSticker = (from, filename, qul) => {
+	xinz.sendMessage(from, filename, MessageType.sticker, {quoted: qul})
+}
+exports.sendKontak = (from, nomor, nama) => {
+	const vcard = 'BEGIN:VCARD\n' + 'VERSION:3.0\n' + 'FN:' + nama + '\n' + 'ORG:Kontak\n' + 'TEL;type=CELL;type=VOICE;waid=' + nomor + ':+' + nomor + '\n' + 'END:VCARD'
+	xinz.sendMessage(from, {displayname: nama, vcard: vcard}, MessageType.contact)
+}
+exports.sendFakeStatus = (from, teks, faketeks) => {
+	xinz.sendMessage(from, teks, MessageType.text, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "mimetype": "image/jpeg", "caption": faketeks, "jpegThumbnail": fs.readFileSync(`./media/aqul.jpeg`)} } } })
+}
+exports.sendFakeStatusWithImg = (from, image, caption, faketeks) => {
+	xinz.sendMessage(from, image, MessageType.image, { quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "mimetype": "image/jpeg", "caption": faketeks, "jpegThumbnail": fs.readFileSync(`./media/aqul.jpeg`)} } }, caption: caption })
+}
+exports.sendMention = (from, text, orangnya, qul) => {
+	xinz.sendMessage(from, text, MessageType.extendedText, {contextInfo: {mentionedJid: orangnya}, quoted: qul})
+}
+exports.hideTag = async function(from, text){
+	let anu = await xinz.groupMetadata(from)
+	let members = anu.participants
+	let ane = []
+	for (let i of members){
+		ane.push(i.jid)
+	}
+	xinz.sendMessage(from, text, MessageType.text, {contextInfo: {"mentionedJid": ane}})
+}
+exports.hideTagImg = async function(from, image){
+	let buff = fs.readFileSync(image)
+	let anu = await xinz.groupMetadata(from)
+	let members = anu.participants
+	let ane = []
+	for (let i of members){
+		ane.push(i.jid)
+	}
+	xinz.sendMessage(from, buff, MessageType.image, {contextInfo: {"mentionedJid": ane}})
+}
+exports.hideTagSticker = async function(from, sticker){
+	let buff = fs.readFileSync(sticker)
+	let anu = await xinz.groupMetadata(from)
+	let members = anu.participants
+	let ane = []
+	for (let i of members){
+		ane.push(i.jid)
+	}
+	xinz.sendMessage(from, buff, MessageType.sticker, {contextInfo: {"mentionedJid": ane}})
+}
+exports.hideTagKontak = async function(from, nomor, nama){
+	let vcard = 'BEGIN:VCARD\n' + 'VERSION:3.0\n' + 'FN:' + nama + '\n' + 'ORG:Kontak\n' + 'TEL;type=CELL;type=VOICE;waid=' + nomor + ':+' + nomor + '\n' + 'END:VCARD'
+	let anu = await xinz.groupMetadata(from)
+	let members = anu.participants
+	let ane = []
+	for (let i of members){
+		ane.push(i.jid)
+	}
+	xinz.sendMessage(from, {displayname: nama, vcard: vcard}, MessageType.contact, {contextInfo: {"mentionedJid": ane}})
+}
+exports.runtime = function(seconds) {
+	seconds = Number(seconds);
+	var d = Math.floor(seconds / (3600 * 24));
+	var h = Math.floor(seconds % (3600 * 24) / 3600);
+	var m = Math.floor(seconds % 3600 / 60);
+	var s = Math.floor(seconds % 60);
+	var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
+	var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+	var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+	var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+	return dDisplay + hDisplay + mDisplay + sDisplay;
+}
+exports.sendFakeToko = (from, teks, fake) => {
+	anu = {
+		key: {
+			fromMe: false,
+			participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {})
+		},
+		message: {
+			"productMessage": {
+				"product": {
+					"productImage":{
+						"mimetype": "image/jpeg",
+						"jpegThumbnail": fs.readFileSync(`./media/aqul.jpeg`)
+					},
+					"title": fake,
+					"description": "Self Aqulzz nih Boss",
+					"currencyCode": "IDR",
+					"priceAmount1000": "50000000",
+					"retailerId": "Self Bot",
+					"productImageCount": 1
+				},
+				"businessOwnerJid": `0@s.whatsapp.net`
+		}
+	}
+}
+	xinz.sendMessage(from, teks, MessageType.text, {quoted: anu})
+}
+exports.sendFakeThumb = async function(from, url, title, desc, fotonya){
+	var anoim = {
+		detectLinks: false
+	}
+	var qul = await xinz.generateLinkPreview(url)
+	qul.title = title
+	qul.description = desc
+	qul.jpegThumbnail = fotonya ? fotonya : fs.readFileSync(`./media/aqul.jpeg`)
+	qul.canonicaUrl = "http://self-bot.com"
+	xinz.sendMessage(from, qul, MessageType.extendedText, anoim)
+}
+exports.sendMediaURL = async(to, url, text="", qul, mids=[]) =>{
+	if(mids.length > 0){
+		text = normalizeMention(to, text, mids)
+	}
+	const fn = Date.now() / 10000;
+	const filename = fn.toString()
+	let mime = ""
+	var download = function (uri, filename, callback) {
+		request.head(uri, function (err, res, body) {
+			mime = res.headers['content-type']
+			request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+		});
+	};
+	download(url, filename, async function () {
+		console.log('done');
+		let media = fs.readFileSync(filename)
+		let type = mime.split("/")[0]+"Message"
+		if(mime === "image/gif"){
+			type = MessageType.video
+			mime = Mimetype.gif
+		}
+		if(mime.split("/")[0] === "audio"){
+			mime = Mimetype.mp4Audio
+		}
+		xinz.sendMessage(to, media, type, { quoted: qul, mimetype: mime, caption: text,contextInfo: {"mentionedJid": mids}})
+		
+		fs.unlinkSync(filename)
+	});
+}
+exports.getGroupAdmins = function(participants){
+    admins = []
+	for (let i of participants) {
+		i.isAdmin ? admins.push(i.jid) : ''
+	}
+	return admins
+}
+exports.getBuffer = async (url, options) => {
+	try {
+		options ? options : {}
+		const res = await axios({
+			method: "get",
+			url,
+			headers: {
+				'DNT': 1,
+				'Upgrade-Insecure-Request': 1
+			},
+			...options,
+			responseType: 'arraybuffer'
+		})
+		return res.data
+	} catch (e) {
+		console.log(`Error : ${e}`)
+	}
+}
+exports.setName = async function(query){
+    const response = await xinz.updateProfileName(query)
+    return response
+}
+exports.setBio = async function(query){
+    const response = await xinz.setStatus(query)
+    return response
+}
