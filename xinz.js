@@ -266,7 +266,7 @@ More? rakit sendirilah`
 							.toFormat('webp')
 							.save(`./sticker/${sender}.webp`)
 				} else {
-					reply(`Kirim gambar/video dengan caption ${prefix}stickerwm nama|author atau tag gambar/video yang sudah dikirim\nNote : Durasi video maximal 10 detik`)
+					aqul.reply(from, `Kirim gambar/video dengan caption ${prefix}stickerwm nama|author atau tag gambar/video yang sudah dikirim\nNote : Durasi video maximal 10 detik`, id)
 				}
 				break
 			case 'takestick':
@@ -379,9 +379,9 @@ More? rakit sendirilah`
 				.catch((err) => aqul.sendFakeStatus(from, JSON.stringify(err), fake))
 				break
 			case 'fdeface': case 'hack':
-				if (!arg) return aqul.reply(from, `Penggunaaan ${prefix}fdeface url|title|desc|bawahnya`, qul)
+				if (!arg) return aqul.reply(from, `Penggunaaan ${prefix}fdeface url|title|desc|url\n\nContoh : ${prefix}fdeface https://google.com|Self Bot|By aqulzz|https://aqul.com`, qul)
 				argz = arg.split("|")
-				if (!argz) return aqul.reply(from, `Penggunaaan ${prefix}fdeface url|title|desc|bawahnya`, qul)
+				if (!argz) return aqul.reply(from, `Penggunaaan ${prefix}fdeface url|title|desc|url\n\nContoh : ${prefix}fdeface https://google.com|Self Bot|By aqulzz|https://aqul.com`, qul)
 				if ((isMedia && !qul.message.videoMessage || isQuotedImage)) {
 					let encmedia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo : qul
 					let media = await xinz.downloadMediaMessage(encmedia)
