@@ -15,6 +15,7 @@
   <a href="https://github.com/zennn08/BaseSelfBot#requirements">Requirements</a> •
   <a href="https://github.com/zennn08/BaseSelfBot#instalasi">Installation</a> •
   <a href="https://github.com/zennn08/BaseSelfBot#features">Features</a> •
+  <a href="https://trakteer.id/aqulzz">Buy Me A Coffe</a> •
   <a href="https://github.com/zennn08/BaseSelfBot#thanks-to">Thanks to</a>
 </p>
 </div>
@@ -148,6 +149,10 @@ atau bisa juga
 | Eval|✅|
 | Tahta|✅|
 | Pubg|✅|
+| Promote|✅|
+| Demote|✅|
+| Kick|✅|
+| Add|✅|
 
 # Thanks to
 * [`Baileys`](https://github.com/adiwajshing/Baileys)

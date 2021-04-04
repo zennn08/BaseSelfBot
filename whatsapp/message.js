@@ -75,6 +75,12 @@ exports.hideTagKontak = async function(from, nomor, nama){
 	}
 	xinz.sendMessage(from, {displayname: nama, vcard: vcard}, MessageType.contact, {contextInfo: {"mentionedJid": ane}})
 }
+exports.getRandom = (ext) => {
+    return `${Math.floor(Math.random() * 10000)}${ext}`
+}
+exports.sleep = async (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 exports.runtime = function(seconds) {
 	seconds = Number(seconds);
 	var d = Math.floor(seconds / (3600 * 24));
@@ -218,4 +224,18 @@ exports.setName = async function(query){
 exports.setBio = async function(query){
     const response = await xinz.setStatus(query)
     return response
+}
+exports.kick = function(from, orangnya){
+	for (let i of orangnya){
+		xinz.groupRemove(from, [i])
+	}
+}
+exports.add = function(from, orangnya){
+	xinz.groupAdd(from, orangnya)
+}
+exports.promote = function(from, orangnya){
+	xinz.groupMakeAdmin(from, orangnya)
+}
+exports.demote = function(from, orangnya){
+	xinz.groupDemoteAdmin(from, orangnya)
 }

@@ -1,3 +1,6 @@
+/*
+BY AQULZZ
+*/
 const
 	{
 		WAConnection,
@@ -127,6 +130,10 @@ No prefix
 => ${prefix}kontaktag
 => ${prefix}tahta teks
 => ${prefix}pubg teks1|teks2
+=> ${prefix}promote
+=> ${prefix}demote
+=> ${prefix}kick
+=> ${prefix}add
 
 More? rakit sendirilah`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
@@ -458,6 +465,79 @@ More? rakit sendirilah`
 					console.log(err)
 					aqul.reply(from, mess.error.api, qul)
 				})
+				break
+			case 'toimg':
+				if (!isQuotedSticker) return reply('Reply stiker nya')
+				if (qul.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated === true){
+					aqul.reply(from, `Maaf tidak mendukung sticker gif`, qul)
+				} else {
+					const encmedia = JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+					const media = await xinz.downloadAndSaveMediaMessage(encmedia)
+					ran = aqul.getRandom('.png')
+					exec(`ffmpeg -i ${media} ${ran}`, (err) => {
+						fs.unlinkSync(media)
+						if (err) {
+							aqul.reply(from, `gagal`, qul)
+							fs.unlinkSync(ran)
+						} else {
+							buffer = fs.readFileSync(ran)
+							xinz.sendMessage(from, buffer, image, {quoted: qul, caption: 'NIH'})
+							fs.unlinkSync(ran)
+						}
+					})
+				}
+				break
+			case 'shutdown':
+				await aqul.FakeTokoForwarded(from, `Bye...`, fake)
+				await aqul.sleep(5000)
+				xinz.close()
+				break
+			case 'spam':
+				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}spam teks|jumlahspam`, qul)
+				argz = arg.split("|")
+				if (!argz) return aqul.reply(from, `Penggunaan ${prefix}spam teks|jumlah`, qul)
+				if (isNaN(argz[1])) return aqul.reply(from, `harus berupa angka`, qul)
+				for (let i = 0; i < argz[1]; i++){
+					aqul.sendText(from, argz[0])
+				}
+				break
+			case 'promote':
+				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}promote @tag atau nomor`, qul)
+				if (qul.message.extendedTextMessage != undefined){
+                    mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
+					await aqul.FakeTokoForwarded(from, `sukses`, fake)
+					aqul.promote(from, mentioned)
+				} else {
+					await aqul.FakeTokoForwarded(from, `sukses`, fake)
+					aqul.promote(from, [args[0] + '@s.whatsapp.net'])
+				}
+				break
+			case 'demote':
+				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}demote @tag atau nomor`, qul)
+				if (qul.message.extendedTextMessage != undefined){
+                    mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
+					await aqul.FakeTokoForwarded(from, `sukses`, fake)
+					aqul.demote(from, mentioned)
+				} else {
+					await aqul.FakeTokoForwarded(from, `sukses`, fake)
+					aqul.demote(from, [args[0] + '@s.whatsapp.net'])
+				}
+				break
+			case 'kick':
+				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}kick @tag atau nomor`, qul)
+				if (qul.message.extendedTextMessage != undefined){
+                    mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
+					await aqul.FakeTokoForwarded(from, `Bye...`, fake)
+					aqul.kick(from, mentioned)
+				} else {
+					await aqul.FakeTokoForwarded(from, `Bye...`, fake)
+					aqul.kick(from, [args[0] + '@s.whatsapp.net'])
+				}
+				break
+			case 'add':
+				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}kick 628xxxx`, qul)
+				aqul.add(from, [args[0] + '@s.whatsapp.net'])
+				aqul.FakeTokoForwarded(from, `Sukses`, fake)
 				break
 			default:
 				if (chats.startsWith('>')){
