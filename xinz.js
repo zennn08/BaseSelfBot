@@ -125,6 +125,8 @@ No prefix
 => ${prefix}stickertag
 => ${prefix}imgtag
 => ${prefix}kontaktag
+=> ${prefix}tahta teks
+=> ${prefix}pubg teks1|teks2
 
 More? rakit sendirilah`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)

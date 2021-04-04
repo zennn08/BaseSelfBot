@@ -146,6 +146,8 @@ atau bisa juga
 | Kontak Tag|✅|
 | Forwarded Message|✅|
 | Eval|✅|
+| Tahta|✅|
+| Pubg|✅|
 
 # Thanks to
 * [`Baileys`](https://github.com/adiwajshing/Baileys)
