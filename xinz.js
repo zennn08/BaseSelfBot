@@ -442,6 +442,21 @@ More? rakit sendirilah`
 					aqul.hideTagKontak(from, argz[0], argz[1])
 				}
 				break
+			case 'tahta':
+				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}tahta teks`, qul)
+				aqul.sendMediaURL(from, `https://api.zeks.xyz/api/hartatahta?text=${arg}&apikey=apivinz`)
+				break
+			case 'pubg':
+				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}pubg teks1|teks2`, qul)
+				argz = arg.split("|")
+				if (!argz) return aqul.reply(from, `Penggunaan ${prefix}pubg teks1|teks2`, qul)
+				axios.get(`https://xinzbot-api.herokuapp.com/api/textmaker/game?text=${argz[0]}&text2=${argz[1]}&theme=pubg&apikey=XinzBot`)
+				.then((res) => aqul.sendMediaURL(from, res.data.result.url))
+				.catch((err) => {
+					console.log(err)
+					aqul.reply(from, mess.error.api, qul)
+				})
+				break
 			default:
 				if (chats.startsWith('>')){
 					console.log(color('[EVAL]'), color(moment(qul.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval brooo`))
