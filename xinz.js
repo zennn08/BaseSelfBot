@@ -37,6 +37,7 @@ fake = 'Self Bot By Aqulzz'
 fakeimage = fs.readFileSync(`./media/aqul.jpeg`)
 prefix = 'z'
 public = false
+autostick = true
 
 xinz.on('message-new', async(qul) => {
     try {
@@ -88,10 +89,72 @@ xinz.on('message-new', async(qul) => {
 			if (chats.toLowerCase() === 'status'){
 				aqul.sendFakeStatus(from, `STATUS: ${public ? 'PUBLIC' : 'SELF'}`)
 			}
+                        if (chats.toLowerCase() === `${prefix}autostickon`){
+				autostick = false
+				aqul.sendFakeStatus(from, `Sukses`, `Autostick status : aktif`)
+			}
+			if (chats.toLowerCase() === `${prefix}autostickoff`){
+				autostick = true
+				aqul.sendFakeStatus(from, `Sukses`, `Autostick status : mati`)
+			}
 		}
 		if (!public){
 			if (!qul.key.fromMe) return
 		}
+                if (!autostick){ // AUTO STICKER BY MEGA
+	        if (isMedia && !qul.message.videoMessage || isQuotedImage) {
+					const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : qul
+					const media = await xinz.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
+					await ffmpeg(`${media}`)
+							.input(media)
+							.on('start', function (cmd) {
+								console.log(`Started : ${cmd}`)
+							})
+							.on('error', function (err) {
+								console.log(`Error : ${err}`)
+  								fs.unlinkSync(media)
+								aqul.reply(from, mess.error.api, qul)
+							})
+							.on('end', function () {
+								console.log('Finish')
+								exec(`webpmux -set exif ./sticker/data.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
+									if (error) return aqul.reply(from, mess.error.api, qul)
+									aqul.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), qul)
+									fs.unlinkSync(media)	
+									fs.unlinkSync(`./sticker/${sender}.webp`)	
+								})
+							})
+							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+							.toFormat('webp')
+							.save(`./sticker/${sender}.webp`)
+				} else if ((isMedia & !qul.message.imageMessage || isQuotedVideo)) {
+					const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : qul
+					const media = await xinz.downloadAndSaveMediaMessage(encmedia, `./sticker/${sender}`)
+						await ffmpeg(`${media}`)
+							.inputFormat(media.split('.')[4])
+							.on('start', function (cmd) {
+								console.log(`Started : ${cmd}`)
+							})
+							.on('error', function (err) {
+								console.log(`Error : ${err}`)
+								fs.unlinkSync(media)
+								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
+								aqul.reply(from, mess.error.api, qul)
+							})
+							.on('end', function () {
+								console.log('Finish')
+								exec(`webpmux -set exif ./sticker/data.exif ./sticker/${sender}.webp -o ./sticker/${sender}.webp`, async (error) => {
+									if (error) return aqul.reply(from, mess.error.api, qul)
+									aqul.sendSticker(from, fs.readFileSync(`./sticker/${sender}.webp`), qul)
+									fs.unlinkSync(media)
+									fs.unlinkSync(`./sticker/${sender}.webp`)
+								})
+							})
+							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+							.toFormat('webp')
+							.save(`./sticker/${sender}.webp`)
+	                                                }
+                }
 		if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(qul.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
         if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(qul.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(xinz.user.name), 'in', color(groupName))}
         switch (command) {
@@ -135,6 +198,11 @@ No prefix
 => ${prefix}demote
 => ${prefix}kick
 => ${prefix}add
+=> ${prefix}upstatus
+=> ${prefix}upstorypic
+=> ${prefix}upstoryvid
+=> ${prefix}autostickon
+=> ${prefix}autostickoff
 
 More? rakit sendirilah`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
