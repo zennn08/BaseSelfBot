@@ -305,10 +305,30 @@ More? rakit sendirilah`
 					fs.unlinkSync(meidia)
 				})
 				break
+                        case 'upstorypic':
+                               if (!itsMe) return aqul.reply(from, 'This command only for owner', qul)
+                               var teksyy = body.slice(12)
+                               aqul.reply(from, 'wait', qul)
+                               var foto = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : qul
+		               var inisiap = await xinz.downloadAndSaveMediaMessage(foto)
+                               var inisiap2 = fs.readFileSync(inisiap)
+                               xinz.sendMessage('status@broadcast', inisiap2, MessageType.image, {quoted: qul, caption: `${teksyy}`})
+                               aqul.reply(from, 'Succes!', qul)
+                               break
+                        case 'upstoryvid':
+                              if (!itsMe) return aqul.reply(from, 'This command only for owner', qul)
+                              var teksyy = body.slice(12)
+                              aqul.reply(from, 'wait', qul)
+                              var foto = isQuotedVideo ? JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : qul
+					var inisiap = await xinz.downloadAndSaveMediaMessage(foto)
+                              var inisiap2 = fs.readFileSync(inisiap)
+                              xinz.sendMessage('status@broadcast', inisiap2, MessageType.video, {quoted: qul, caption: `${teksyy}`})
+                              aqul.reply(from, 'Succes!', qul)
+                              break
 			case 'upstatus'://DhyZx
 				if (!q) return reply(`Kirim ${prefix}upstatus Textnya`)
 				aqul.sendMessage('status@broadcast', `${q}`, extendedText)
-				reply(`Done Up Status: ${q}`)
+				aqul.reply(from, `Done Up Status: ${q}`, qul)
 				break
 			case 'hidetag':
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}hidetag teks`, qul)
