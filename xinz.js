@@ -135,6 +135,7 @@ No prefix
 => ${prefix}demote
 => ${prefix}kick
 => ${prefix}add
+=> ${prefix}brainly
 
 More? rakit sendirilah`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
@@ -310,6 +311,27 @@ More? rakit sendirilah`
 				aqul.sendMessage('status@broadcast', `${q}`, extendedText)
 				reply(`Done Up Status: ${q}`)
 				break
+case 'brainly'://EaBro
+            if (args.length >= 2){
+                const BrainlySearch = require('./lib/brainly')
+                let tanya = body.slice(9)
+                let jum = Number(tanya.split('.')[1]) || 2
+                if (jum > 10) return aqul.reply(from, 'Max 10!', id)
+                if (Number(tanya[tanya.length-1])){
+                    tanya
+                }
+                aqul.reply(from, `? *Pertanyaan* : ${tanya.split('.')[0]}\n\n? *Jumlah jawaban* : ${Number(jum)}`, id)
+				await BrainlySearch(tanya.split('.')[0],Number(jum)).then( res => {
+					if (res.jawaban.fotoJawaban.length == 0) {
+						aqul.reply(from, `? *Pertanyaan* : ${res.pertanyaan}\n\n? *Jawaban* : ${res.jawaban.judulJawaban}\n`, id)
+					} else {
+						aqul.reply(from, `? *Pertanyaan* : ${res.pertanyaan}\n\n? *Jawaban* ?: ${res.jawaban.judulJawaban}\n\n? *Link foto jawaban* : ${res.jawaban.fotoJawaban.join('\n')}`, id)
+					}
+                })
+            } else {
+                aqul.reply(from, 'Usage :\n!brainly [pertanyaan] [.jumlah]\n\nEx : \n!brainly NKRI .2', id)
+            }
+            break
 			case 'hidetag':
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}hidetag teks`, qul)
 				aqul.hideTag(from, arg)
