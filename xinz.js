@@ -28,6 +28,7 @@ const { color } = require('./lib/color');
 const mess = JSON.parse(fs.readFileSync('./whatsapp/mess.json'));
 const axios = require('axios');
 const Exif = require('./lib/exif');
+const { uptotele, uptonaufal } = require('./lib/uploadimage')
 const exif = new Exif();
 
 conn.connect()
@@ -137,6 +138,10 @@ No prefix
 => ${prefix}creategrup nama|tag
 => ${prefix}getgrup
 => ${prefix}upstatus text
+=> ${prefix}tovideo
+=> ${prefix}togif
+=> ${prefix}spam teks|jumlah spam
+=> ${prefix}imgtourl
 
 More? rakit sendirilah`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
@@ -415,6 +420,7 @@ More? rakit sendirilah`
 				boij = JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
 				delb = await xinz.downloadMediaMessage(boij)
 				fs.writeFileSync(`./media/aqul.jpeg`, delb)
+				fakeimage = fs.readFileSync(`./media/aqul.jpeg`)
 				aqul.sendFakeStatus(from, `Sukses`, fake)
 				break
 			case 'getpic':
@@ -426,7 +432,7 @@ More? rakit sendirilah`
 						pic = 'https://i.ibb.co/Tq7d7TZ/age-hananta-495-photo.png'
 					}
 					thumb = await aqul.getBuffer(pic)
-					xinz.sendMessage(from, thumb, MessageType.image)
+					aqul.sendImage(from, thumb)
 				}
 				break
 			case 'imgtag':
@@ -469,10 +475,29 @@ More? rakit sendirilah`
 					aqul.reply(from, mess.error.api, qul)
 				})
 				break
-			case 'toimg':
-				if (!isQuotedSticker) return reply('Reply stiker nya')
+			case 'togif':
+				if (!isQuotedSticker) return reply(from, 'Reply stiker nya', qul)
 				if (qul.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated === true){
-					aqul.reply(from, `Maaf tidak mendukung sticker gif`, qul)
+					const encmedia = JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+					const media = await xinz.downloadAndSaveMediaMessage(encmedia)
+					const uploadn = await uptonaufal(media, Date.now() + '.webp')
+					const anjj = await axios.get(`http://nzcha-apii.herokuapp.com/webp-to-mp4?url=${uploadn.result.image}`)
+					thumb = await aqul.getBuffer(anjj.data.result)
+					aqul.sendGif(from, thumb)
+					fs.unlinkSync(media)
+				} else {
+					aqul.reply(from, `Harus sticker bergerak`, qul)
+				}
+				break
+			case 'toimg': case 'tovideo':
+				if (!isQuotedSticker) return aqul.reply(from, 'Reply stiker nya', qul)
+				if (qul.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated === true){
+					const encmedia = JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo
+					const media = await xinz.downloadAndSaveMediaMessage(encmedia)
+					const uploadn = await uptonaufal(media, Date.now() + '.webp')
+					const anjj = await axios.get(`http://nzcha-apii.herokuapp.com/webp-to-mp4?url=${uploadn.result.image}`)
+					await aqul.sendMediaURL(from, anjj.data.result, 'Nih')
+					fs.unlinkSync(media)
 				} else {
 					const encmedia = JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 					const media = await xinz.downloadAndSaveMediaMessage(encmedia)
@@ -484,7 +509,7 @@ More? rakit sendirilah`
 							fs.unlinkSync(ran)
 						} else {
 							buffer = fs.readFileSync(ran)
-							xinz.sendMessage(from, buffer, image, {quoted: qul, caption: 'NIH'})
+							aqul.sendImage(from, buffer, 'nih', qul)
 							fs.unlinkSync(ran)
 						}
 					})
@@ -543,9 +568,18 @@ More? rakit sendirilah`
 				aqul.FakeTokoForwarded(from, `Sukses`, fake)
 				break
 			case 'upstatus':
-				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}upstatus text`, qul)
-				await aqul.upTextStatus(arg)
-				aqul.FakeTokoForwarded(from, 'Sukses', fake)
+				if (!arg) return aqul.reply(from, `Penggunaan \n${prefix}upstatus text\n${prefix}upstatus caption <reply atau kirim video / img>`, qul)
+				if (isMedia && !qul.message.videoMessage || isQuotedImage) {
+					const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : qul
+					const media = await xinz.downloadAndSaveMediaMessage(encmedia)
+					aqul.upImgStatus(media, arg).then(() => { aqul.FakeTokoForwarded(from, 'Sukses', fake) })
+				} else if ((isMedia || isQuotedVideo )) {
+					const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : qul
+					const media = await xinz.downloadAndSaveMediaMessage(encmedia)
+					aqul.upVidStatus(media, arg).then(() => { aqul.FakeTokoForwarded(from, 'Sukses', fake) })
+				} else {
+					await aqul.upTextStatus(arg).then(() => { aqul.FakeTokoForwarded(from, 'Sukses', fake) })
+				}
 				break
 			case 'getgrup': case 'getgroup': case 'getg':
 				const ingfo = await aqul.getGroup(totalchat)
@@ -564,6 +598,13 @@ More? rakit sendirilah`
 				} else {
 					aqul.reply(from, `Penggunaan ${prefix}creategrup namagrup|@tag`, qul)
 				}
+				break
+			case 'imgtourl': case 'tourl':
+				const encmediiia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : qul
+				const mediaq = await xinz.downloadAndSaveMediaMessage(encmediiia)
+				const upli = await uptotele(mediaq)
+				aqul.reply(from, `${upli}`, qul)
+				fs.unlinkSync(mediaq)
 				break
 			default:
 				if (chats.startsWith('>')){

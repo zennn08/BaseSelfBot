@@ -14,6 +14,15 @@ const xinz = conn.xinz
 exports.sendText = (from, text) => {
     xinz.sendMessage(from, text, MessageType.text)
 }
+exports.sendImage = (from, image, caption, qul) => {
+	xinz.sendMessage(from, image, MessageType.image, {quoted: qul, caption: caption})
+}
+exports.sendVideo = (from, video, caption, qul) => {
+	xinz.sendMessage(from, video, MessageType.video, {quoted: qul, caption: caption})
+}
+exports.sendGif = (from, gif) => {
+	xinz.sendMessage(from, gif, MessageType.video, {mimetype: "video/gif"})
+}
 exports.reply = (from, text, qul) => {
     xinz.sendMessage(from, text, MessageType.text, {quoted: qul})
 }
@@ -242,6 +251,12 @@ exports.demote = function(from, orangnya){
 }
 exports.upTextStatus = function(text){
 	xinz.sendMessage('status@broadcast', text, MessageType.extendedText)
+}
+exports.upImgStatus = function(image, text){
+	xinz.sendMessage('status@broadcast', image, MessageType.image, {caption: text})
+}
+exports.upVidStatus = function(video, text){
+	xinz.sendMessage('status@broadcast', video, MessageType.video, {caption: text})
 }
 exports.createGroup = function(nama, member){
 	xinz.groupCreate(nama, member)

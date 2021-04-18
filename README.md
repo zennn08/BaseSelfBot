@@ -123,6 +123,9 @@ atau bisa juga
 ```
 - Serah aja 
 
+## Note
+- Jangan lupa kasih credit
+
 # Features
 
 | Menu nya dikit |✅|
@@ -155,7 +158,12 @@ atau bisa juga
 | Add|✅|
 | Create Group|✅|
 | Get Group|✅|
-| UpStatus|✅|
+| UpStatus Text|✅|
+| UpStatus Image|✅|
+| UpStatus Video|✅|
+| To Video|✅|
+| To Gif|✅|
+| Img To Url|✅|
 
 # Thanks to
 * [`Baileys`](https://github.com/adiwajshing/Baileys)
