@@ -70,7 +70,6 @@ xinz.on('message-new', async(qul) => {
 		const groupAdmins = isGroup ? aqul.getGroupAdmins(groupMembers) : ''
 		const groupOwner = isGroup ? groupMetadata.owner : ''
 		const itsMe = sender === botNumber ? true : false
-		const q = args.join(' ')
 		const isUrl = (url) => {
 			return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%.+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%+.~#?&/=]*)/, 'gi'))
 		}
@@ -135,6 +134,9 @@ No prefix
 => ${prefix}demote
 => ${prefix}kick
 => ${prefix}add
+=> ${prefix}creategrup nama|tag
+=> ${prefix}getgrup
+=> ${prefix}upstatus text
 
 More? rakit sendirilah`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
@@ -305,11 +307,6 @@ More? rakit sendirilah`
 					fs.unlinkSync(meidia)
 				})
 				break
-			case 'upstatus'://DhyZx
-				if (!q) return reply(`Kirim ${prefix}upstatus Textnya`)
-				aqul.sendMessage('status@broadcast', `${q}`, extendedText)
-				reply(`Done Up Status: ${q}`)
-				break
 			case 'hidetag':
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}hidetag teks`, qul)
 				aqul.hideTag(from, arg)
@@ -319,14 +316,12 @@ More? rakit sendirilah`
 				let text = aqul.runtime(run)
 				aqul.sendFakeStatus(from, text, `Runtime bro`)
 				break
-			case 'speed': 
-			case 'ping':
+			case 'speed': case 'ping':
 				let timestamp = speed();
 				let latensi = speed() - timestamp
 				aqul.sendFakeStatus(from, `Speed: ${latensi.toFixed(4)}second`, fake)
 				break
-			case 'mystat': 
-			case 'mystatus':
+			case 'mystat': case 'mystatus':
 				let i = []
 				let giid = []
 				for (mem of totalchat){
@@ -395,8 +390,7 @@ More? rakit sendirilah`
 				.then((res) => aqul.sendFakeStatus(from, JSON.stringify(res), fake))
 				.catch((err) => aqul.sendFakeStatus(from, JSON.stringify(err), fake))
 				break
-			case 'fdeface': 
-			case 'hack':
+			case 'fdeface': case 'hack':
 				if (!arg) return aqul.reply(from, `Penggunaaan ${prefix}fdeface url|title|desc|url\n\nContoh : ${prefix}fdeface https://google.com|Self Bot|By aqulzz|https://aqul.com`, qul)
 				argz = arg.split("|")
 				if (!argz) return aqul.reply(from, `Penggunaaan ${prefix}fdeface url|title|desc|url\n\nContoh : ${prefix}fdeface https://google.com|Self Bot|By aqulzz|https://aqul.com`, qul)
@@ -408,9 +402,7 @@ More? rakit sendirilah`
 					aqul.sendFakeThumb(from, argz[0], argz[1], argz[2], argz[3])
 				}
 				break
-			case 'fakethumbnail': 
-			case 'fthumbnail': 
-			case 'fakethumb':
+			case 'fakethumbnail': case 'fthumbnail': case 'fakethumb':
 				if ((isMedia && !qul.message.videoMessage || isQuotedImage)) {
 					let encmedia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo : qul
 					let media = await xinz.downloadMediaMessage(encmedia)
@@ -446,8 +438,7 @@ More? rakit sendirilah`
 					aqul.reply(from, `Kirim gambar atau reply dengan caption ${prefix}imgtag caption`, qul)
 				}
 				break
-			case 'sticktag':
-			case 'stickertag':
+			case 'sticktag': case 'stickertag':
 				if (!isQuotedSticker) return aqul.reply(from, `Reply sticker dengan caption *${prefix}stickertag*`, qul)
 				let encmediai = JSON.parse(JSON.stringify(qul).replace('quotedM','m')).message.extendedTextMessage.contextInfo
 				let mediai = await xinz.downloadMediaMessage(encmediai)
@@ -457,7 +448,7 @@ More? rakit sendirilah`
 				argz = arg.split('|')
 				if (!argz) return aqul.reply(from, `Penggunaan ${prefix}kontak @tag atau nomor|nama`, qul)
 				if (qul.message.extendedTextMessage != undefined){
-                    		mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
+                    mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
 					aqul.hideTagKontak(from, mentioned[0].split('@')[0], argz[1])
 				} else {
 					aqul.hideTagKontak(from, argz[0], argz[1])
@@ -516,7 +507,7 @@ More? rakit sendirilah`
 			case 'promote':
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}promote @tag atau nomor`, qul)
 				if (qul.message.extendedTextMessage != undefined){
-                   		mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
+                    mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
 					await aqul.FakeTokoForwarded(from, `sukses`, fake)
 					aqul.promote(from, mentioned)
 				} else {
@@ -527,7 +518,7 @@ More? rakit sendirilah`
 			case 'demote':
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}demote @tag atau nomor`, qul)
 				if (qul.message.extendedTextMessage != undefined){
-                   		mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
+                    mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
 					await aqul.FakeTokoForwarded(from, `sukses`, fake)
 					aqul.demote(from, mentioned)
 				} else {
@@ -538,7 +529,7 @@ More? rakit sendirilah`
 			case 'kick':
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}kick @tag atau nomor`, qul)
 				if (qul.message.extendedTextMessage != undefined){
-                   		mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
+                    mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
 					await aqul.FakeTokoForwarded(from, `Bye...`, fake)
 					aqul.kick(from, mentioned)
 				} else {
@@ -550,6 +541,29 @@ More? rakit sendirilah`
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}kick 628xxxx`, qul)
 				aqul.add(from, [args[0] + '@s.whatsapp.net'])
 				aqul.FakeTokoForwarded(from, `Sukses`, fake)
+				break
+			case 'upstatus':
+				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}upstatus text`, qul)
+				await aqul.upTextStatus(arg)
+				aqul.FakeTokoForwarded(from, 'Sukses', fake)
+				break
+			case 'getgrup': case 'getgroup': case 'getg':
+				const ingfo = await aqul.getGroup(totalchat)
+				let txt = `Ingfo grup\nJumlah Grup: ${ingfo.length}\n\n`
+				for (let i = 0; i < ingfo.length; i++){
+					txt += `Nama grup : ${ingfo[i].subject}\nID grup : ${ingfo[i].id}\nDibuat : ${moment(`${ingfo[i].creation}` * 1000).tz('Asia/Jakarta').format('DD/MM/YYYY HH:mm:ss')}\nJumlah Peserta : ${ingfo[i].participants.length}\n\n`
+				}
+				aqul.FakeTokoForwarded(from, txt, fake)
+				break
+			case 'creategrup': case 'creategroup': case 'createg':
+				argz = arg.includes('|')
+				if (qul.message.extendedTextMessage != undefined){
+                    mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
+					let anji = await aqul.createGroup(argz[0], mentioned)
+					aqul.FakeTokoForwarded(from, JSON.stringify(anji), fake)
+				} else {
+					aqul.reply(from, `Penggunaan ${prefix}creategrup namagrup|@tag`, qul)
+				}
 				break
 			default:
 				if (chats.startsWith('>')){

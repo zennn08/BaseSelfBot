@@ -153,6 +153,9 @@ atau bisa juga
 | Demote|✅|
 | Kick|✅|
 | Add|✅|
+| Create Group|✅|
+| Get Group|✅|
+| UpStatus|✅|
 
 # Thanks to
 * [`Baileys`](https://github.com/adiwajshing/Baileys)
