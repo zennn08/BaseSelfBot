@@ -36,8 +36,8 @@ const xinz = conn.xinz
 
 fake = 'Self Bot By Aqulzz'
 fakeimage = fs.readFileSync(`./media/aqul.jpeg`)
-prefix = 'z'
-public = false
+prefix = '/'
+public = true
 
 xinz.on('message-new', async(qul) => {
     try {
@@ -100,8 +100,6 @@ xinz.on('message-new', async(qul) => {
 
 Hitung mundur ramdhan
 	=> ${ramadhan.data.result}
-
-No prefix
 => status
 => > <eval>
 
