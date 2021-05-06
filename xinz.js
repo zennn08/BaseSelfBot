@@ -45,6 +45,7 @@ xinz.on('message-new', async(qul) => {
 		if (qul.key && qul.key.remoteJid == 'status@broadcast') return
 
         global.prefix
+        qul.message = (Object.keys(qul.message)[0] === 'ephemeralMessage') ? qul.message.ephemeralMessage.message : qul.message
 		const content = JSON.stringify(qul.message)
 		const from = qul.key.remoteJid
 		const type = Object.keys(qul.message)[0]
