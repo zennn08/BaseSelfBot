@@ -55,6 +55,7 @@ xinz.on('message-new', async(qul) => {
 		const command = body.slice(1).trim().split(/ +/).shift().toLowerCase()
 		const args = body.trim().split(/ +/).slice(1)
 		const isCmd = body.startsWith(prefix)
+		const q = args.join(" ")
 		const arg = chats.slice(command.length + 2, chats.length)
 		const ramadhan = await axios.get('https://xinzbot-api.herokuapp.com/api/hitungmundur?apikey=XinzBot&tanggal=12&bulan=4')
 		const ucapan = await axios.get('https://xinzbot-api.herokuapp.com/api/ucapan?apikey=XinzBot&timeZone=Asia/Jakarta')
@@ -142,6 +143,7 @@ No prefix
 => ${prefix}togif
 => ${prefix}spam teks|jumlah spam
 => ${prefix}imgtourl
+=> ${prefix}ephemeral
 
 More? rakit sendirilah`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
@@ -301,6 +303,14 @@ More? rakit sendirilah`
 					fs.unlinkSync(media)
 					fs.unlinkSync(`./sticker/takestick_${sender}.exif`)
 				})
+				break
+	  		 case 'ephemeral'://DhyZx:v
+				if (!q) return aqul.reply(from, 'textnya apa brohh', qul)
+				xinz.sendMessage(from, `${q}`,
+					MessageType.text, {
+					sendEphemeral: true,
+					thumbnail: fs.readFileSync('./media/aqul.jpeg')
+					})
 				break
 			case 'colong':
 				if (!isQuotedSticker) return aqul.reply(from, `Reply sticker dengan caption *${prefix}colong*`, qul)
