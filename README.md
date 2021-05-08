@@ -148,6 +148,7 @@ atau bisa juga
 | Sticker Tag|✅|
 | Image Tag|✅|
 | Kontak Tag|✅|
+| Document Tag|✅|
 | Forwarded Message|✅|
 | Eval|✅|
 | Tahta|✅|
@@ -173,3 +174,4 @@ atau bisa juga
 * [`VideFrelan`](https://github.com/VideFrelan)
 * [`TobyG74`](https://github.com/TobyG74)
 * [`DhyZx`](https://github.com/dhyZx)
+* [`Dehanjing`](https://github.com/Dehante)
