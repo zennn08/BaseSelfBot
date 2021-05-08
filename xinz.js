@@ -132,6 +132,7 @@ No prefix
 => ${prefix}stickertag
 => ${prefix}imgtag
 => ${prefix}kontaktag
+=> ${prefix}doctag
 => ${prefix}tahta teks
 => ${prefix}pubg teks1|teks2
 => ${prefix}promote
@@ -484,7 +485,7 @@ More? rakit sendirilah`
               mem.push(adm.id.replace('c.us', 's.whatsapp.net'))
               })
 		      result = fs.readFileSync(`doc.txt`)
-              xinz.sendMessage(from, result, document, { contextInfo: {mentionedJid: mem },quoted: qul, mimetype: 'text/plain' filename: 'XinzBot.txt' })
+              xinz.sendMessage(from, result, document, { contextInfo: {mentionedJid: mem },quoted: qul, mimetype: 'text/plain' })
 			  await fs.unlinkSync(`doc.txt`)
 			  break
 			case 'tahta':
