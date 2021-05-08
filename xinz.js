@@ -82,6 +82,7 @@ xinz.on('message-new', async(qul) => {
 		const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
 		const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
 		const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
+		const isQuotedDocument = type === 'extendedTextMessage' && content.includes('documentMessage')
 		if (itsMe){
 			if (chats.toLowerCase() === `${prefix}self`){
 				public = false
@@ -471,6 +472,21 @@ More? rakit sendirilah`
 					aqul.hideTagKontak(from, argz[0], argz[1])
 				}
 				break
+			case 'doctag': //by Dehanjing
+		if (!isQuotedDocument) return aqul.reply(from, `Reply Document dengan caption *${prefix + command}*`, qul)
+              boij = JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
+              delb = await xinz.downloadMediaMessage(boij)
+              await fs.writeFileSync(`doc.txt`, delb)
+              var group = await xinz.groupMetadata(from)
+              var member = group['participants']
+              var mem = []
+              member.map(async adm => {
+              mem.push(adm.id.replace('c.us', 's.whatsapp.net'))
+              })
+		      result = fs.readFileSync(`doc.txt`)
+              xinz.sendMessage(from, result, document, { contextInfo: {mentionedJid: mem },quoted: qul, mimetype: 'text/plain' filename: 'XinzBot.txt' })
+			  await fs.unlinkSync(`doc.txt`)
+			  break
 			case 'tahta':
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}tahta teks`, qul)
 				aqul.sendMediaURL(from, `https://api.zeks.xyz/api/hartatahta?text=${arg}&apikey=apivinz`)
