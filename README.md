@@ -149,6 +149,7 @@ atau bisa juga
 | Image Tag|✅|
 | Kontak Tag|✅|
 | Document Tag|✅|
+| Giphy Tag|✅|
 | Forwarded Message|✅|
 | Eval|✅|
 | Tahta|✅|
