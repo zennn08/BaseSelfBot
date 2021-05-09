@@ -99,7 +99,7 @@ xinz.on('message-new', async(qul) => {
 		const groupDesc = isGroup ? groupMetadata.desc : ''
 		const groupAdmins = isGroup ? aqul.getGroupAdmins(groupMembers) : ''
 		const groupOwner = isGroup ? groupMetadata.owner : ''
-		const itsMe = sender === botNumber ? true : false
+		const itsMe = qul.key.fromMe ? true : false
 		const isUrl = (url) => {
 			return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%.+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%+.~#?&/=]*)/, 'gi'))
 		}
@@ -192,6 +192,7 @@ More? rakit sendirilah`
 				aqul.sendFakeStatus(from, `Status: PUBLIC`, fake)
 				break
 			case 'exif':
+				if (!itsMe) return
 				if (args.length < 1) return aqul.reply(from, `Penggunaan ${prefix}exif nama|author`, qul)
 				if (!arg.split('|')) return aqul.reply(from, `Penggunaan ${prefix}exif nama|author`, qul)
 				exif.create(arg.split('|')[0], arg.split('|')[1])
@@ -415,6 +416,7 @@ More? rakit sendirilah`
 				}
 				break
 			case 'term':
+				if (!itsMe) return
 				if (!arg) return
 				exec(arg, (err, stdout) => {
 					if (err) return aqul.sendFakeStatus(from, err, fake)
@@ -432,12 +434,14 @@ More? rakit sendirilah`
 				aqul.sendFakeStatus(from, `Prefix berhasil diubah menjadi ${prefix}`, fake)
 				break
 			case 'setname':
+				if (!itsMe) return
 				if (!arg) return aqul.reply(from, 'masukkan nama', qul)
 				aqul.setName(arg)
 				.then((res) => aqul.sendFakeStatus(from, JSON.stringify(res), fake))
 				.catch((err) => aqul.sendFakeStatus(from, JSON.stringify(err), fake))
 				break
 			case 'setbio':
+				if (!itsMe) return
 				if (!arg) return aqul.reply(from, 'masukkan bio', qul)
 				aqul.setBio(arg)
 				.then((res) => aqul.sendFakeStatus(from, JSON.stringify(res), fake))
@@ -584,6 +588,7 @@ More? rakit sendirilah`
 				xinz.close()
 				break
 			case 'spam':
+				if (!itsMe) return
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}spam teks|jumlahspam`, qul)
 				argz = arg.split("|")
 				if (!argz) return aqul.reply(from, `Penggunaan ${prefix}spam teks|jumlah`, qul)
@@ -631,6 +636,7 @@ More? rakit sendirilah`
 				aqul.FakeTokoForwarded(from, `Sukses`, fake)
 				break
 			case 'upstatus':
+				if (!itsMe) return
 				if (!arg) return aqul.reply(from, `Penggunaan \n${prefix}upstatus text\n${prefix}upstatus caption <reply atau kirim video / img>`, qul)
 				if (isMedia && !qul.message.videoMessage || isQuotedImage) {
 					const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : qul
