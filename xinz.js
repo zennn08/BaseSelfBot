@@ -164,6 +164,7 @@ No prefix
 => ${prefix}imgtag
 => ${prefix}kontaktag
 => ${prefix}doctag
+=> ${prefix}giftag
 => ${prefix}tahta teks
 => ${prefix}pubg teks1|teks2
 => ${prefix}promote
@@ -512,21 +513,35 @@ More? rakit sendirilah`
 					aqul.hideTagKontak(from, argz[0], argz[1])
 				}
 				break
-			case 'doctag': //by Dehanjing
-		if (!isQuotedDocument) return aqul.reply(from, `Reply Document dengan caption *${prefix + command}*`, qul)
-              boij = JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-              delb = await xinz.downloadMediaMessage(boij)
-              await fs.writeFileSync(`doc.txt`, delb)
-              var group = await xinz.groupMetadata(from)
-              var member = group['participants']
-              var mem = []
-              member.map(async adm => {
-              mem.push(adm.id.replace('c.us', 's.whatsapp.net'))
-              })
-		      result = fs.readFileSync(`doc.txt`)
-              xinz.sendMessage(from, result, document, { contextInfo: {mentionedJid: mem },quoted: qul, mimetype: 'text/plain' })
-			  await fs.unlinkSync(`doc.txt`)
-			  break
+			case 'doctag':  case 'dokumentag': //by Dehanjing
+		        if (!isQuotedDocument) return aqul.reply(from, `Reply Document dengan caption *${prefix + command}*`, qul)
+                quoted = JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
+                download = await xinz.downloadMediaMessage(quoted)
+                await fs.writeFileSync(`doc.txt`, download)
+                var group = await xinz.groupMetadata(from)
+                var member = group['participants']
+                var mem = []
+                member.map(async adm => {
+                mem.push(adm.id.replace('c.us', 's.whatsapp.net'))
+                })
+                xinz.sendMessage(from, fs.readFileSync(`doc.txt`), document, { contextInfo: {mentionedJid: mem }, quoted: qul, mimetype: 'text/plain' })
+			    await fs.unlinkSync(`doc.txt`)
+			    break
+		    case 'giftag':   case 'giphytag': //by Dehanjing
+                if (!isQuotedVideo) return reply(`Reply Gif nya dengan caption ${prefix + command}`)
+                quoted = JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
+                download = await xinz.downloadMediaMessage(quoted)
+                await fs.writeFileSync(`giftag.gif`, download)
+                var group = await xinz.groupMetadata(from)
+                var member = group['participants']
+                var mem = []
+                member.map(async adm => {
+                mem.push(adm.id.replace('c.us', 's.whatsapp.net'))
+                })
+                thumb = fs.readFileSync(`giftag.gif`)
+                xinz.sendMessage(from, thumb, video, { contextInfo: {mentionedJid: mem }, quoted: qul, mimetype: 'video/gif', thumbnail: thumb })
+			    await fs.unlinkSync(`giftag.gif`)
+			    break
 			case 'tahta':
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}tahta teks`, qul)
 				aqul.sendMediaURL(from, `https://api.zeks.xyz/api/hartatahta?text=${arg}&apikey=apivinz`)
