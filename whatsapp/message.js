@@ -259,15 +259,11 @@ exports.upVidStatus = function(video, text){
 	xinz.sendMessage('status@broadcast', video, MessageType.video, {caption: text})
 }
 exports.createGroup = function(nama, member){
+	let a
 	xinz.groupCreate(nama, member)
-	let anj = {
-		status: true,
-		creator: 'aqulzz',
-		grup: nama,
-		peserta: member,
-		message: 'Pembuatan grup berhasil'
-	}
-	return anj
+	.then((res) => a = res )
+	.catch((err) => a = err)
+	return a
 }
 exports.getGroup = async function(totalchat){
 	let grup = []

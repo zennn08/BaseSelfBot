@@ -165,10 +165,13 @@ atau bisa juga
 | To Video|✅|
 | To Gif|✅|
 | Img To Url|✅|
+| Media To Url|✅|
+| Antidelets|✅|
 
 # Thanks to
 * [`Baileys`](https://github.com/adiwajshing/Baileys)
 * [`MhankBarBar`](https://github.com/MhankBarBar)
+* [`MRHRTZ`](https://github.com/MRHRTZ)
 * [`Mamet`](https://github.com/mamet8/)
 * [`SlavyanDesu`](https://github.com/SlavyanDesu)
 * [`VideFrelan`](https://github.com/VideFrelan)

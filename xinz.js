@@ -28,7 +28,7 @@ const { color } = require('./lib/color');
 const mess = JSON.parse(fs.readFileSync('./whatsapp/mess.json'));
 const axios = require('axios');
 const Exif = require('./lib/exif');
-const { uptotele, uptonaufal } = require('./lib/uploadimage')
+const { uptotele, uptonaufal, uploadFile } = require('./lib/uploadimage')
 const exif = new Exif();
 
 conn.connect()
@@ -39,11 +39,21 @@ fakeimage = fs.readFileSync(`./media/aqul.jpeg`)
 prefix = 'z'
 public = false
 
+xinz.on('message-update', async (msg) => { // THX TO BANG HANIF
+        require('./antidelete/antidelete.js')(xinz, msg)
+    })
 xinz.on('message-new', async(qul) => {
     try {
         if (!qul.message) return
 		if (qul.key && qul.key.remoteJid == 'status@broadcast') return
-
+		let infoMSG = JSON.parse(fs.readFileSync(`./antidelete/msg.data.json`))
+		infoMSG.push(JSON.parse(JSON.stringify(qul)))
+		fs.writeFileSync(`./antidelete/msg.data.json`, JSON.stringify(infoMSG, null, 2))
+		const urutan_pesan = infoMSG.length
+		if (urutan_pesan === 5000) {
+			infoMSG.splice(0, 4300)
+			fs.writeFileSync(`./antidelete/msg.data.json`, JSON.stringify(infoMSG, null, 2))
+		}
         global.prefix
         qul.message = (Object.keys(qul.message)[0] === 'ephemeralMessage') ? qul.message.ephemeralMessage.message : qul.message
 		const content = JSON.stringify(qul.message)
@@ -147,6 +157,8 @@ No prefix
 => ${prefix}spam teks|jumlah spam
 => ${prefix}imgtourl
 => ${prefix}ephemeral
+=> ${prefix}antidelete
+=> ${prefix}tourl <media>
 
 More? rakit sendirilah`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
@@ -618,21 +630,79 @@ More? rakit sendirilah`
 				aqul.FakeTokoForwarded(from, txt, fake)
 				break
 			case 'creategrup': case 'creategroup': case 'createg':
-				argz = arg.includes('|')
+				argz = arg.split('|')
 				if (qul.message.extendedTextMessage != undefined){
                     mentioned = qul.message.extendedTextMessage.contextInfo.mentionedJid
-					let anji = await aqul.createGroup(argz[0], mentioned)
-					aqul.FakeTokoForwarded(from, JSON.stringify(anji), fake)
+					xinz.groupCreate(argz[0], mentioned)
+					.then((res) => aqul.FakeTokoForwarded(from, JSON.stringify(res, null, 2).toString(), fake))
+					.catch((err) => console.log(err))
 				} else {
 					aqul.reply(from, `Penggunaan ${prefix}creategrup namagrup|@tag`, qul)
 				}
 				break
-			case 'imgtourl': case 'tourl':
+			case 'imgtourl':
 				const encmediiia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : qul
-				const mediaq = await xinz.downloadAndSaveMediaMessage(encmediiia)
+				const mediaq = await xinz.downloadMediaMessage(encmediiia)
 				const upli = await uptotele(mediaq)
 				aqul.reply(from, `${upli}`, qul)
-				fs.unlinkSync(mediaq)
+				break
+			case 'tourl':
+				let a = JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
+				let b = await xinz.downloadAndSaveMediaMessage(a)
+				let c = await uploadFile(b)
+				aqul.reply(from, c.result, qul)
+				fs.unlinkSync(b)
+				break
+			case 'antidelete':
+				const dataRevoke = JSON.parse(fs.readFileSync('./antidelete/gc-revoked.json'))
+				const dataCtRevoke = JSON.parse(fs.readFileSync('./antidelete/ct-revoked.json'))
+				const dataBanCtRevoke = JSON.parse(fs.readFileSync('./antidelete/ct-revoked-banlist.json'))
+				const isRevoke = dataRevoke.includes(from)
+				const isCtRevoke = dataCtRevoke.data
+				const isBanCtRevoke = dataBanCtRevoke.includes(sender) ? true : false
+				if (args.length === 0) return xinz.sendMessage(from, `Penggunaan fitur antidelete :\n\n*${prefix}antidelete [aktif/mati]* (Untuk grup)\n*${prefix}antidelete [ctaktif/ctmati]* (untuk semua kontak)\n*${prefix}antidelete banct 628558xxxxxxx* (banlist kontak)`, MessageType.text)
+				if (args[0] == 'aktif') {
+					if (isGroup) {
+						if (isRevoke) return xinz.sendMessage(from, `Antidelete telah diaktifkan di grup ini sebelumnya!`, MessageType.text)
+						dataRevoke.push(from)
+						fs.writeFileSync('./antidelete/gc-revoked.json', JSON.stringify(dataRevoke, null, 2))
+						xinz.sendMessage(from, `*Succes Enable Antidelete Grup!*`, MessageType.text)
+					} else if (!isGroup) {
+						xinz.sendMessage(from, `Untuk kontak penggunaan *${prefix}antidelete ctaktif*`, MessageType.text)
+					}
+				} else if (args[0] == 'ctaktif') {
+					if (!isGroup) {
+						if (isCtRevoke) return xinz.sendMessage(from, `Antidelete telah diaktifkan di semua kontak sebelumnya!`, MessageType.text)
+						dataCtRevoke.data = true
+						fs.writeFileSync('./antidelete/ct-revoked.json', JSON.stringify(dataCtRevoke, null, 2))
+						xinz.sendMessage(from, `Antidelete diaktifkan disemua kontak!`, MessageType.text)
+					} else if (isGroup) {
+						xinz.sendMessage(from, `Untuk grup penggunaan *${prefix}antidelete aktif*`, MessageType.text)
+					}
+				} else if (args[0] == 'banct') {
+					if (isBanCtRevoke) return xinz.sendMessage(from, `kontak ini telah ada di database banlist!`, MessageType.text)
+					if (args.length === 1 || args[1].startsWith('0')) return xinz.sendMessage(from, `Masukan nomer diawali dengan 62! contoh 62859289xxxxx`, MessageType.text)
+					dataBanCtRevoke.push(args[1] + '@s.whatsapp.net')
+					fs.writeFileSync('./antidelete/ct-revoked-banlist.json', JSON.stringify(dataBanCtRevoke, null, 2))
+					xinz.sendMessage(from, `Kontak ${args[1]} telah dimasukan ke banlist antidelete secara permanen!`, MessageType.text)
+				} else if (args[0] == 'mati') {
+					if (isGroup) {
+						const index = dataRevoke.indexOf(from)
+						dataRevoke.splice(index, 1)
+						fs.writeFileSync('./antidelete/gc-revoked.json', JSON.stringify(dataRevoke, null, 2))
+						xinz.sendMessage(from, `*Succes disable Antidelete Grup!*`, MessageType.text)
+					} else if (!isGroup) {
+						xinz.sendMessage(from, `Untuk kontak penggunaan *${prefix}antidelete ctmati*`, MessageType.text)
+					}
+				} else if (args[0] == 'ctmati') {
+					if (!isGroup) {
+						dataCtRevoke.data = false
+						fs.writeFileSync('./antidelete/ct-revoked.json', JSON.stringify(dataCtRevoke, null, 2))
+						xinz.sendMessage(from, `Antidelete dimatikan disemua kontak!`, MessageType.text)
+					} else if (isGroup) {
+						xinz.sendMessage(from, `Untuk grup penggunaan *${prefix}antidelete mati*`, MessageType.text)
+					}
+				}
 				break
 			default:
 				if (chats.startsWith('>')){
