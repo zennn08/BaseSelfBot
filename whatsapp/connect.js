@@ -6,6 +6,7 @@ OKE TERIMA KASIH
 */
 const { WAConnection, MessageType } = require("@adiwajshing/baileys")
 const qrcode = require("qrcode-terminal")
+const figlet = require('figlet')
 const fs = require('fs')
 const { color } = require('../lib/color')
 
@@ -14,9 +15,18 @@ exports.xinz = xinz
 
 exports.connect = async() => {
     let authofile = './aqulzz.json'
+	xinz.logger.level = 'warn'
+	console.log(color(figlet.textSync('Base Self Bot', {
+		font: 'Standard',
+		horizontalLayout: 'default',
+		vertivalLayout: 'default',
+		width: 80,
+		whitespaceBreak: false
+	}), 'cyan'))
+	console.log(color('[ CREATED BY AQULZZ ]'))
 	xinz.on('qr', qr => {
         qrcode.generate(qr, { small: true })
-        console.log(`QR Siap, Scan Pack`)
+        console.log(color('[XINZ]', 'yellow'), color('Scan Qr'))
     })
     /*
 	xinz.on('credentials-updated', () => {
@@ -26,12 +36,16 @@ exports.connect = async() => {
     */
 	fs.existsSync(authofile) && xinz.loadAuthInfo(authofile)
 	xinz.on('connecting', () => {
-		console.log(color('Connecting...'))
+		console.log(color('[XINZ]', 'yellow'), color('Connecting...'))
 	})
 	xinz.on('open', () => {
-		console.log(color('Welcome Owner'))
+		console.log(color('[XINZ]', 'yellow'), color('Connect'))
 	})
 	await xinz.connect({timeoutMs: 30*1000})
     fs.writeFileSync(authofile, JSON.stringify(xinz.base64EncodedAuthInfo(), null, '\t'))
-    return xinz
+    console.log(color(' ===================================================='))
+	console.log(color('│ + Github : https://github.com/zennn08/BaseSelfBot  │'))
+	console.log(color('│ + Donate : https://trakteer.id/aqulzz        		│'))
+	console.log(color(' ===================================================='))
+	return xinz
 }

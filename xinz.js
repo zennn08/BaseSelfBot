@@ -37,11 +37,28 @@ const xinz = conn.xinz
 fake = 'Self Bot By Aqulzz'
 fakeimage = fs.readFileSync(`./media/aqul.jpeg`)
 prefix = 'z'
+blocked = []
+baterai = {
+    baterai: 0,
+    cas: false
+}
 public = false
 
+xinz.on('CB:Blocklist', json => {
+	if (blocked.length > 2) return
+	for (let i of json[1].blocklist) {
+		blocked.push(i.replace('c.us','s.whatsapp.net'))
+	}
+})
+xinz.on('CB:action,,battery', json => {
+	const a = json[2][0][1].value
+	const b = json[2][0][1].live
+	baterai.baterai = a
+	baterai.cas = b
+})
 xinz.on('message-update', async (msg) => { // THX TO BANG HANIF
-        require('./antidelete/antidelete.js')(xinz, msg)
-    })
+	require('./antidelete/antidelete.js')(xinz, msg)
+})
 xinz.on('message-new', async(qul) => {
     try {
         if (!qul.message) return
@@ -100,6 +117,10 @@ xinz.on('message-new', async(qul) => {
 			}
 			if (chats.toLowerCase() === 'status'){
 				aqul.sendFakeStatus(from, `STATUS: ${public ? 'PUBLIC' : 'SELF'}`)
+			}
+			if (chats.startsWith('>')){
+				console.log(color('[EVAL]'), color(moment(qul.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval brooo`))
+				return aqul.reply(from, JSON.stringify(eval(chats.slice(2)), null, 2), qul)
 			}
 		}
 		if (!public){
@@ -367,6 +388,8 @@ More? rakit sendirilah`
                 const { wa_version, mcc, mnc, os_version, device_manufacturer, device_model } = xinz.user.phone
                 anu = process.uptime()
                 teskny = `*V. Whatsapp :* ${wa_version}
+*Baterai :* ${baterai.baterai}%
+*Charge :* ${baterai.cas === 'true' ? 'Ya' : 'Tidak'}
 *RAM :* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
 *MCC :* ${mcc}
 *MNC :* ${mnc}
@@ -705,10 +728,6 @@ More? rakit sendirilah`
 				}
 				break
 			default:
-				if (chats.startsWith('>')){
-					console.log(color('[EVAL]'), color(moment(qul.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval brooo`))
-                	return aqul.reply(from, JSON.stringify(eval(chats.slice(2)), null, 2), qul)
-				}
 				break
         }
     } catch (err) {
