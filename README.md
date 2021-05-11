@@ -140,6 +140,7 @@ atau bisa juga
 | Set Reply|✅|
 | Set Prefix|✅|
 | Set Name|✅|
+| Set Profile Picture|✅|
 | Set Bio|✅|
 | Fake Deface|✅|
 | Fake Thumbnail|✅|

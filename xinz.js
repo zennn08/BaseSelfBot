@@ -117,11 +117,11 @@ xinz.on('message-new', async(qul) => {
 			}
 			if (chats.toLowerCase() === 'status'){
 				aqul.sendFakeStatus(from, `STATUS: ${public ? 'PUBLIC' : 'SELF'}`)
-			}
+			}/*
 			if (chats.startsWith('>')){
 				console.log(color('[EVAL]'), color(moment(qul.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Eval brooo`))
 				return aqul.reply(from, JSON.stringify(eval(chats.slice(2)), null, 2), qul)
-			}
+			}*/
 		}
 		if (!public){
 			if (!qul.key.fromMe) return
@@ -137,12 +137,12 @@ Hitung mundur ramdhan
 
 No prefix
 => status
-=> > <eval>
 
 => ${prefix}sticker
 => ${prefix}swm nama | author
 => ${prefix}takestick namma | author
 => ${prefix}colong <reply stiker>
+=> ${prefix}eval <java scripts>
 => ${prefix}self
 => ${prefix}public
 => ${prefix}hidetag
@@ -155,6 +155,7 @@ No prefix
 => ${prefix}setreply
 => ${prefix}setprefix
 => ${prefix}setname
+=> ${prefix}setpp
 => ${prefix}setbio
 => ${prefix}fdeface
 => ${prefix}fakethumbnail
@@ -698,6 +699,7 @@ More? rakit sendirilah`
 				fs.unlinkSync(b)
 				break
 			case 'antidelete':
+				if (!itsMe) return
 				const dataRevoke = JSON.parse(fs.readFileSync('./antidelete/gc-revoked.json'))
 				const dataCtRevoke = JSON.parse(fs.readFileSync('./antidelete/ct-revoked.json'))
 				const dataBanCtRevoke = JSON.parse(fs.readFileSync('./antidelete/ct-revoked-banlist.json'))
@@ -746,6 +748,63 @@ More? rakit sendirilah`
 					} else if (isGroup) {
 						xinz.sendMessage(from, `Untuk grup penggunaan *${prefix}antidelete mati*`, MessageType.text)
 					}
+				}
+				break
+			case 'setpp': case 'setprofilepicture':
+				if (!itsMe) return
+				if (isMedia && !qul.message.videoMessage || isQuotedImage) {
+					const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : qul
+					const media = await xinz.downloadMediaMessage(encmedia)
+					xinz.updateProfilePicture(xinz.user.jid, media)
+					.then((res) => aqul.FakeTokoForwarded(from, JSON.stringify(res, null, 2).toString(), fake))
+					.catch((err) => console.log(err))
+				} else {
+					aqul.reply(from, `Kirim gambar atau reply gambar dengan caption ${prefix}setpp`, qul)
+				}
+				break
+			case 'eval':
+				if (!itsMe) return
+				let code = body.slice(6)
+				try {
+
+					if (!code) return aqul.reply(from, 'No JavaScript Code', qul)
+					let evaled;
+
+					if (code.includes("--silent") && code.includes("--async")) {
+						code = code.replace("--async", "").replace("--silent", "");
+
+						return await eval(`(async () => { ${code} })()`)
+					} else if (code.includes("--async")) {
+						code = code.replace("--async", "");
+
+						evaled = await eval(`(async () => { ${code} })()`);
+					} else if (code.includes("--silent")) {
+						code = code.replace("--silent", "");
+
+						return await eval(code);
+					} else evaled = await eval(code);
+
+					/*if (typeof evaled !== "string")
+						evaled = require("util").inspect(evaled, {
+							depth: 0
+						*/
+
+					let output = clean(evaled);
+					aqul.reply(from, JSON.stringify(evaled, null, 2), qul)
+
+				} catch (err) {
+					console.error(err)
+					const error = clean(err)
+					aqul.reply(from, error, qul)
+				}
+
+				function clean(text) {
+					if (typeof text === "string")
+						return text
+							.replace(/`/g, `\`${String.fromCharCode(8203)}`)
+							.replace(/@/g, `@${String.fromCharCode(8203)}`);
+					// eslint-disable-line prefer-template
+					else return text;
 				}
 				break
 			default:
