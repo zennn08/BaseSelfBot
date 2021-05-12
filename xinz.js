@@ -30,15 +30,12 @@ const axios = require('axios');
 const Exif = require('./lib/exif');
 const { uptotele, uptonaufal, uploadFile } = require('./lib/uploadimage')
 const exif = new Exif();
-const setting = JSON.parse(fs.readFileSync('./lib/setting.json'))
-
-let { 
-    fake,
-    fakeimage,
-    } = setting
 
 conn.connect()
 const xinz = conn.xinz
+
+fake = "© 𝐗𝐢𝐧𝐳-𝐓𝐞𝐚𝐦"
+fakeimage = fs.readFileSync("./media/aqul.jpeg")
 prefix = 'z'
 blocked = []
 baterai = {
