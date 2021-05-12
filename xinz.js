@@ -30,12 +30,15 @@ const axios = require('axios');
 const Exif = require('./lib/exif');
 const { uptotele, uptonaufal, uploadFile } = require('./lib/uploadimage')
 const exif = new Exif();
+const setting = JSON.parse(fs.readFileSync('./lib/setting.json'))
+
+let { 
+    fake,
+    fakeimage,
+    } = setting
 
 conn.connect()
 const xinz = conn.xinz
-
-fake = 'Self Bot By Aqulzz'
-fakeimage = fs.readFileSync(`./media/aqul.jpeg`)
 prefix = 'z'
 blocked = []
 baterai = {
@@ -126,64 +129,58 @@ xinz.on('message-new', async(qul) => {
 		if (!public){
 			if (!qul.key.fromMe) return
 		}
-		if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(qul.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
+	if (isCmd && !isGroup) {console.log(color('[CMD]'), color(moment(qul.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`))}
         if (isCmd && isGroup) {console.log(color('[CMD]'), color(moment(qul.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(xinz.user.name), 'in', color(groupName))}
         switch (command) {
 			case 'menu': case 'help':
-				textnya = `*${ucapan.data.result}*
+				textnya = `	𝐗𝐈𝐍𝐙-𝐒𝐄𝐋𝐅𝐁𝐎𝐓
 
-Hitung mundur ramdhan
-	=> ${ramadhan.data.result}
+\`\`\`▢ ${prefix}sticker\`\`\`
+\`\`\`▢ ${prefix}swm nama | author\`\`\`
+\`\`\`▢ ${prefix}takestick namma | author\`\`\`
+\`\`\`▢ ${prefix}colong <reply stiker>\`\`\`
+\`\`\`▢ ${prefix}eval <java scripts>\`\`\`
+\`\`\`▢ ${prefix}self\`\`\`
+\`\`\`▢ ${prefix}public\`\`\`
+\`\`\`▢ ${prefix}hidetag\`\`\`
+\`\`\`▢ ${prefix}runtime\`\`\`
+\`\`\`▢ ${prefix}speed\`\`\`
+\`\`\`▢ ${prefix}mystat\`\`\`
+\`\`\`▢ ${prefix}kontak\`\`\`
+\`\`\`▢ ${prefix}hidetag\`\`\`
+\`\`\`▢ ${prefix}term\`\`\`
+\`\`\`▢ ${prefix}setreply\`\`\`
+\`\`\`▢ ${prefix}setprefix\`\`\`
+\`\`\`▢ ${prefix}setname\`\`\`
+\`\`\`▢ ${prefix}setpp\`\`\`
+\`\`\`▢ ${prefix}setbio\`\`\`
+\`\`\`▢ ${prefix}fdeface\`\`\`
+\`\`\`▢ ${prefix}fakethumbnail\`\`\`
+\`\`\`▢ ${prefix}setthumb\`\`\`
+\`\`\`▢ ${prefix}getpic\`\`\`
+\`\`\`▢ ${prefix}stickertag\`\`\`
+\`\`\`▢ ${prefix}imgtag\`\`\`
+\`\`\`▢ ${prefix}kontaktag\`\`\`
+\`\`\`▢ ${prefix}doctag\`\`\`
+\`\`\`▢ ${prefix}giftag\`\`\`
+\`\`\`▢ ${prefix}tahta teks\`\`\`
+\`\`\`▢ ${prefix}pubg teks1|teks2\`\`\`
+\`\`\`▢ ${prefix}promote\`\`\`
+\`\`\`▢ ${prefix}demote\`\`\`
+\`\`\`▢ ${prefix}kick\`\`\`
+\`\`\`▢ ${prefix}add\`\`\`
+\`\`\`▢ ${prefix}creategrup nama|tag\`\`\`
+\`\`\`▢ ${prefix}getgrup\`\`\`
+\`\`\`▢ ${prefix}upstatus text\`\`\`
+\`\`\`▢ ${prefix}tovideo\`\`\`
+\`\`\`▢ ${prefix}togif\`\`\`
+\`\`\`▢ ${prefix}spam teks|jumlah spam\`\`\`
+\`\`\`▢ ${prefix}imgtourl\`\`\`
+\`\`\`▢ ${prefix}ephemeral <teks>\`\`\`
+\`\`\`▢ ${prefix}antidelete\`\`\`
+\`\`\`▢ ${prefix}tourl <media>\`\`\`
 
-No prefix
-=> status
-
-=> ${prefix}sticker
-=> ${prefix}swm nama | author
-=> ${prefix}takestick namma | author
-=> ${prefix}colong <reply stiker>
-=> ${prefix}eval <java scripts>
-=> ${prefix}self
-=> ${prefix}public
-=> ${prefix}hidetag
-=> ${prefix}runtime
-=> ${prefix}speed
-=> ${prefix}mystat
-=> ${prefix}kontak
-=> ${prefix}hidetag
-=> ${prefix}term
-=> ${prefix}setreply
-=> ${prefix}setprefix
-=> ${prefix}setname
-=> ${prefix}setpp
-=> ${prefix}setbio
-=> ${prefix}fdeface
-=> ${prefix}fakethumbnail
-=> ${prefix}setthumb
-=> ${prefix}getpic
-=> ${prefix}stickertag
-=> ${prefix}imgtag
-=> ${prefix}kontaktag
-=> ${prefix}doctag
-=> ${prefix}giftag
-=> ${prefix}tahta teks
-=> ${prefix}pubg teks1|teks2
-=> ${prefix}promote
-=> ${prefix}demote
-=> ${prefix}kick
-=> ${prefix}add
-=> ${prefix}creategrup nama|tag
-=> ${prefix}getgrup
-=> ${prefix}upstatus text
-=> ${prefix}tovideo
-=> ${prefix}togif
-=> ${prefix}spam teks|jumlah spam
-=> ${prefix}imgtourl
-=> ${prefix}ephemeral
-=> ${prefix}antidelete
-=> ${prefix}tourl <media>
-
-More? rakit sendirilah`
+*© Xinz-Team*`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
 				break
             case 'test':
