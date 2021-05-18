@@ -151,6 +151,7 @@ atau bisa juga
 | Kontak Tag|✅|
 | Document Tag|✅|
 | Giphy Tag|✅|
+| Location Tag|✅|
 | Forwarded Message|✅|
 | Eval|✅|
 | Tahta|✅|
