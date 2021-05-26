@@ -85,8 +85,6 @@ xinz.on('message-new', async(qul) => {
 		const isCmd = body.startsWith(prefix)
 		const q = args.join(" ")
 		const arg = chats.slice(command.length + 2, chats.length)
-		const ramadhan = await axios.get('https://xinzbot-api.herokuapp.com/api/hitungmundur?apikey=XinzBot&tanggal=12&bulan=4')
-		const ucapan = await axios.get('https://xinzbot-api.herokuapp.com/api/ucapan?apikey=XinzBot&timeZone=Asia/Jakarta')
 
         const botNumber = xinz.user.jid
 		const isGroup = from.endsWith('@g.us')
