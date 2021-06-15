@@ -15,7 +15,7 @@ exports.xinz = xinz
 
 exports.connect = async() => {
     let authofile = './aqulzz.json'
-    	xinz.verion = [2, 2119, 6]
+    	xinz.version = [2, 2119, 6]
 	xinz.logger.level = 'warn'
 	console.log(color(figlet.textSync('Base Self Bot', {
 		font: 'Standard',
