@@ -158,6 +158,7 @@ xinz.on('message-new', async(qul) => {
 \`\`\`▢ ${prefix}kontaktag\`\`\`
 \`\`\`▢ ${prefix}doctag\`\`\`
 \`\`\`▢ ${prefix}giftag\`\`\`
+\`\`\`▢ ${prefix}loctag\`\`\`
 \`\`\`▢ ${prefix}tahta teks\`\`\`
 \`\`\`▢ ${prefix}pubg teks1|teks2\`\`\`
 \`\`\`▢ ${prefix}promote\`\`\`
@@ -506,7 +507,7 @@ xinz.on('message-new', async(qul) => {
 					aqul.hideTagKontak(from, argz[0], argz[1])
 				}
 				break
-			case 'doctag':  case 'dokumentag': //by Dehanjing
+			case 'doctag':  case 'dokumentag': //by Dehanjing v:
 		        if (!isQuotedDocument) return aqul.reply(from, `Reply Document dengan caption *${prefix + command}*`, qul)
                 quoted = JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
                 download = await xinz.downloadMediaMessage(quoted)
@@ -520,7 +521,7 @@ xinz.on('message-new', async(qul) => {
                 xinz.sendMessage(from, fs.readFileSync(`doc.txt`), document, { contextInfo: {mentionedJid: mem }, quoted: qul, mimetype: 'text/plain' })
 			    await fs.unlinkSync(`doc.txt`)
 			    break
-		    case 'giftag':   case 'giphytag': //by Dehanjing
+		        case 'giftag':   case 'giphytag': //by Dehanjing v:
                 if (!isQuotedVideo) return reply(`Reply Gif nya dengan caption ${prefix + command}`)
                 quoted = JSON.parse(JSON.stringify(qul).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
                 download = await xinz.downloadMediaMessage(quoted)
@@ -535,6 +536,15 @@ xinz.on('message-new', async(qul) => {
                 xinz.sendMessage(from, thumb, video, { contextInfo: {mentionedJid: mem }, quoted: qul, mimetype: 'video/gif', thumbnail: thumb })
 			    await fs.unlinkSync(`giftag.gif`)
 			    break
+			case 'loctag':  case 'lokasitag': //by Dehanjing v:
+			var group = await xinz.groupMetadata(from)
+                        var member = group['participants']
+                        var mem = []
+                        member.map(async adm => {
+                        mem.push(adm.id.replace('c.us', 's.whatsapp.net'))
+                        })
+                        xinz.sendMessage(from, {degreesLatitude: 24.121231, degreesLongitude: 55.1121221}, MessageType.location, { contextInfo: {mentionedJid: mem } })
+                            break
 			case 'tahta':
 				if (!arg) return aqul.reply(from, `Penggunaan ${prefix}tahta teks`, qul)
 				aqul.sendMediaURL(from, `https://api.zeks.xyz/api/hartatahta?text=${arg}&apikey=apivinz`)
