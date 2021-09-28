@@ -175,7 +175,7 @@ xinz.on('message-new', async(qul) => {
 \`\`\`▢ ${prefix}antidelete\`\`\`
 \`\`\`▢ ${prefix}tourl <media>\`\`\`
 
-*© Xinz-Team*`
+*© 𝐃𝐡𝐚𝐧𝐳𝐬-𝐁𝐨𝐭𝐳*`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
 				break
             case 'test':
