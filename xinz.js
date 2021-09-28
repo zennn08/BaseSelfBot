@@ -34,7 +34,7 @@ const exif = new Exif();
 conn.connect()
 const xinz = conn.xinz
 
-fake = "© 𝐗𝐢𝐧𝐳-𝐓𝐞𝐚𝐦"
+fake = "© 𝐃𝐡𝐚𝐧𝐳𝐬𝐁𝐨𝐭𝐳"
 fakeimage = fs.readFileSync("./media/aqul.jpeg")
 prefix = 'z'
 blocked = []
@@ -175,7 +175,7 @@ xinz.on('message-new', async(qul) => {
 \`\`\`▢ ${prefix}antidelete\`\`\`
 \`\`\`▢ ${prefix}tourl <media>\`\`\`
 
-*© Xinz-Team*`
+*© 𝐃𝐡𝐚𝐧𝐳𝐬𝐁𝐨𝐭𝐳*`
 				aqul.sendFakeStatusWithImg(from, fakeimage, textnya, fake)
 				break
             case 'test':
